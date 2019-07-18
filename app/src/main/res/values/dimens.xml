@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="zero_dp">0dp</dimen>
+    <dimen name="one_px">1px</dimen>
+    <dimen name="one_dp">1.0dp</dimen>
+    <dimen name="two_dp">2.0dp</dimen>
+    <dimen name="three_dp">3.0dp</dimen>
+    <dimen name="five_dp">5.0dp</dimen>
+    <dimen name="eight_dp">8.0dp</dimen>
+    <dimen name="ten_dp">10.0dp</dimen>
+    <dimen name="twelve_dp">12.0dp</dimen>
+    <dimen name="twelve_sp">12.0sp</dimen>
+    <dimen name="fourteen_sp">14.0sp</dimen>
+    <dimen name="sixteen_dp">16.0dp</dimen>
+    <dimen name="sixteen_sp">16.0sp</dimen>
+    <dimen name="eighteen_dp">18.0dp</dimen>
+    <dimen name="eighteen_sp">18.0sp</dimen>
+    <dimen name="twenty_dp">20.0dp</dimen>
+    <dimen name="fifteen_dp">15.0dp</dimen>
+    <dimen name="twenty_sp">20.0sp</dimen>
+    <dimen name="twenty_four_dp">24.0dp</dimen>
+    <dimen name="twenty_four_sp">24.0sp</dimen>
+    <dimen name="thirty_dp">30.0dp</dimen>
+    <dimen name="twenty_seven_dp">27.0dp</dimen>
+    <dimen name="thirty_sp">30.0sp</dimen>
+    <dimen name="forty_dp">40.0dp</dimen>
+    <dimen name="fifty_dp">50.0dp</dimen>
+    <dimen name="sixty_dp">60.0dp</dimen>
+    <dimen name="forty_sp">40.0sp</dimen>
+    <dimen name="fifty_sp">50.0sp</dimen>
+    <dimen name="eighty_dp">80.0dp</dimen>
+    <dimen name="eighty_sp">80.0sp</dimen>
+    <dimen name="hundred_dp">100.0dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+</resources>

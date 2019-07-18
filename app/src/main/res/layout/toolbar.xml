@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/orange"
+    android:elevation="@dimen/five_dp"
+    android:minHeight="?attr/actionBarSize"
+    android:orientation="vertical"
+    android:paddingRight="@dimen/twenty_seven_dp"
+    android:theme="@style/ToolbarDarkOverflow">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="@dimen/eighty_dp"
+        android:layout_height="44dp"
+        android:src="@drawable/pepsi_logo"
+        android:layout_gravity="center_vertical|left"
+        android:layout_margin="@dimen/twelve_dp"
+        android:adjustViewBounds="true"
+        android:maxHeight="44dp" />
+
+    <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|left"
+        android:layout_marginLeft="@dimen/twelve_dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/twenty_sp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|right"
+        android:src="@drawable/pepsi_logo" />
+
+</android.support.v7.widget.Toolbar>

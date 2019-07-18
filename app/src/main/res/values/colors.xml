@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+    <color name="dark_gray">#333</color>
+    <color name="medium_gray">#555</color>
+    <color name="light_gray">#999</color>
+    <color name="white_thirty_percent">#4cffffff</color>
+    <color name="white_sixty_percent">#99ffffff</color>
+    <color name="red">#d1363a</color>
+    <color name="slider_background_color">#efefef</color>
+    <color name="blue_variant_1">#0069aa</color>
+    <color name="slider_drawer_text_color">#737373</color>
+    <color name="black_fifty_percent">#7f000000</color>
+    <color name="content_background">#fcf4eb</color>
+    <color name="background_tab_pressed">#de2428</color>
+    <color name="background_options_tab_pressed">#e17a01</color>
+    <color name="orange">#f25a43</color>
+    <color name="gold">#ffbf00</color>
+    <color name="gray_one">#e2e2e2</color>
+    <color name="gray_two">#cccccc</color>
+    <color name="green">#009688</color>
+    <color name="blue">#0069aa</color>
+    <color name="yellow_star">#ebe300</color>
+    <color name="activate_text_color">#FF666666</color>
+    <color name="deactivate_text_color">#FFCCCCCC</color>
+    <color name="red_variant_1">#f42c37</color>
+
+
+</resources>

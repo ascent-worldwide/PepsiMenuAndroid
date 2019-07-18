@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "944985900804",
+    "firebase_url": "https://pepsimenuapp.firebaseio.com",
+    "project_id": "pepsimenuapp",
+    "storage_bucket": "pepsimenuapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944985900804:android:91402d65d9ac1497",
+        "android_client_info": {
+          "package_name": "com.clairvoyant.naijamenu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944985900804-69hld4kc6a4ikgctq9u9bvjpj2vn0l4r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.clairvoyant.naijamenu",
+            "certificate_hash": "2e5a5d801e025c608ed4f56a705a03d25dbe7b0c"
+          }
+        },
+        {
+          "client_id": "944985900804-c9ctde837b0kkh0mg1ockk23aqmcapnq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9H1STZ2Nb-1QAEEyXFq9mQySeSzqlzvo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944985900804-c9ctde837b0kkh0mg1ockk23aqmcapnq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

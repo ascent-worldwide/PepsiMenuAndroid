@@ -1,0 +1,117 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/login_bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
+                android:id="@+id/welcometxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ten_dp"
+                android:layout_marginTop="@dimen/twenty_dp"
+                android:padding="@dimen/ten_dp"
+                android:text="@string/welcome"
+                android:textColor="@color/white"
+                android:textSize="@dimen/fifty_sp" />
+
+            <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/welcometxt"
+                android:layout_marginLeft="@dimen/twenty_dp"
+                android:text="@string/enter"
+                android:textColor="@color/white"
+                android:textSize="@dimen/twenty_four_sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/twenty_dp"
+                android:background="@drawable/login_bg_rounded"
+                android:orientation="vertical"
+                android:padding="@dimen/twenty_dp">
+
+                <com.clairvoyant.naijamenu.fonts.RobotoLightEditText
+                    android:id="@+id/et_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/thirty_dp"
+                    android:background="@drawable/border_bottom"
+                    android:drawableLeft="@drawable/user_icon"
+                    android:drawablePadding="@dimen/ten_dp"
+                    android:hint="@string/usrname"
+                    android:padding="@dimen/twelve_dp"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="@dimen/twenty_four_dp" />
+
+                <com.clairvoyant.naijamenu.fonts.RobotoLightEditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/thirty_dp"
+                    android:background="@drawable/border_bottom"
+                    android:drawableLeft="@drawable/password_icon"
+                    android:drawablePadding="@dimen/ten_dp"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:padding="@dimen/twelve_dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="@dimen/twenty_four_sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.clairvoyant.naijamenu.fonts.RobotoRegularButton
+                        android:id="@+id/btn_sign_in"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/twelve_dp"
+                        android:background="@drawable/red_button_selector"
+                        android:paddingBottom="@dimen/twenty_dp"
+                        android:paddingTop="@dimen/twenty_dp"
+                        android:text="@string/sign_in"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/thirty_sp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <include
+        android:id="@+id/progress_view_login"
+        layout="@layout/progress_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+</RelativeLayout>

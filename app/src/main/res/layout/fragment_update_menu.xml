@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/content_background"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLargeInverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateDrawable="@drawable/progress"
+        android:visibility="gone" />
+
+    <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
+        android:id="@+id/txtCurrentversion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/ten_dp"
+        android:text="@string/currentVersionTxt"
+        android:textColor="@color/black"
+        android:textSize="@dimen/twenty_sp" />
+
+    <com.clairvoyant.naijamenu.fonts.RobotoRegularButton
+        android:id="@+id/btnUpdateMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/twenty_dp"
+        android:background="@drawable/orange_background_rounded"
+        android:padding="@dimen/twelve_dp"
+        android:text="@string/updateMenuTxt"
+        android:textColor="@color/white"
+        android:textSize="@dimen/twenty_four_sp" />
+
+    <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
+        android:id="@+id/txtUpdateMenuInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/ten_dp"
+        android:text="@string/menuUpdateAvailableTxt"
+        android:textColor="@color/dark_gray"
+        android:textSize="@dimen/fourteen_sp" />
+
+</LinearLayout>

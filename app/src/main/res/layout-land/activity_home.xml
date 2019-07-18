@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/home_screen_bg" />
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="600dp"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/twenty_dp"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/menu_box"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/ten_dp"
+                    android:singleLine="true"
+                    android:text="@string/menu_tagline"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/twenty_sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/ten_dp"
+                    android:background="@drawable/menu_background"
+                    android:drawableTop="@drawable/menu_icon"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/menu"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/twenty_four_sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/challenge_box"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/ten_dp"
+                    android:singleLine="true"
+                    android:text="@string/challenge_tagline"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/twenty_sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/ten_dp"
+                    android:background="@drawable/challenge_background"
+                    android:drawableTop="@drawable/challenge_icon"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/challenge"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/twenty_four_sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/recipe_box"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/rate_tag"
+                    android:layout_margin="@dimen/ten_dp"
+                    android:background="@drawable/recipe_background"
+                    android:drawableTop="@drawable/rate_recipe_icon"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/rate_out_recipes"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/twenty_four_sp" />
+
+                <TextView
+                    android:id="@+id/rate_tag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:padding="@dimen/ten_dp"
+                    android:singleLine="true"
+                    android:text="@string/rate_tagline"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/twenty_sp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/restaurant_box"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/rest_tag"
+                    android:layout_margin="@dimen/ten_dp"
+                    android:background="@drawable/restaurant_background"
+                    android:drawableTop="@drawable/rate_restaurant_icon"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/rate_out_restaurant"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/twenty_four_sp" />
+
+                <TextView
+                    android:id="@+id/rest_tag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:padding="@dimen/ten_dp"
+                    android:singleLine="true"
+                    android:text="@string/restaurant_tagline"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/twenty_sp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivRestaurantIcon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/twenty_dp"
+        android:layout_toRightOf="@+id/ll"
+        android:src="@drawable/pepsi_logo" />
+
+    <include
+        android:id="@+id/progress_view_promotion"
+        layout="@layout/progress_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+</RelativeLayout>

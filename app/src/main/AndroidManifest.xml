@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.clairvoyant.naijamenu"
+    android:versionCode="1"
+    android:versionName="1.1">
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="27" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- Gcm permissions -->
+    <uses-permission android:name="in.whoopit.marketplace.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <!-- use to wake the processor, to receive notification -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="com.clairvoyant.naijamenu.utils.AppController"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <!-- Broadcast Receiver for GCM -->
+        <receiver
+            android:name="com.clairvoyant.naijamenu.GcmBroadcastReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="com.pepsi.menu" />
+            </intent-filter>
+        </receiver>
+
+        <!-- GCM intent service to handle message -->
+        <service android:name="com.clairvoyant.naijamenu.GcmIntentService"/>
+
+        <activity
+            android:name="com.clairvoyant.naijamenu.MainActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.clairvoyant.naijamenu.LoginActivity"
+            android:noHistory="true"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.clairvoyant.naijamenu.HomeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="com.clairvoyant.naijamenu.RateFragmentActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.clairvoyant.naijamenu.PromotionActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.clairvoyant.naijamenu.RestaurantPromotionActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.clairvoyant.naijamenu.MenuFragmentActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.clairvoyant.naijamenu.QuizPromotionActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.clairvoyant.naijamenu.GamePlayRegistration"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+            android:screenOrientation="portrait"/>
+
+        <provider
+            android:name="com.pepsi.database.DatabaseProvider"
+            android:authorities="com.clairvoyant.naijamenu"
+            android:exported="false"/>
+
+        <receiver android:name="com.clairvoyant.naijamenu.utils.NetWorkChangeReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.clairvoyant.naijamenu.SplashScreen"
+            android:noHistory="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".utils.DownloadVideoService"
+            android:exported="false"></service>
+
+        <activity
+            android:name="com.clairvoyant.naijamenu.BrandPromotionActivity"
+            android:label="@string/title_activity_brand_promotion"
+            android:screenOrientation="portrait"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="8417c8165d7d6cc8e40449cfee618aea76e9d9a6" />
+
+    </application>
+
+</manifest>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pepsi Naija\nMenu App</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="welcome">Welcome</string>
+    <string name="enter">Please Enter Your Username And Password To Login</string>
+    <string name="usrname">User Name</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="logout">Logout</string>
+    <string name="menu">Menu</string>
+    <string name="challenge">Challenge</string>
+    <string name="rate_out_recipes">Rate our\nrecipes</string>
+    <string name="rate_out_restaurant">Rate our\nrestaurant</string>
+    <string name="menu_tagline">Delight your taste buds</string>
+    <string name="challenge_tagline">Its a brain &amp; wallet thing</string>
+    <string name="rate_tagline">So that the best stands out</string>
+    <string name="restaurant_tagline">Appreciation brings you closer</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+    <string name="description">Description</string>
+    <string name="game_registration_note">To avail your prize coupon\nPlease help us with below details:</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="submit">SUBMIT</string>
+    <string name="rating">Ratings</string>
+    <string name="write_review">Write Your Review</string>
+    <string name="birthday">Birthday</string>
+    <string name="anniversary">Anniversary</string>
+    <string name="excellent">Excellent</string>
+    <string name="good">Good</string>
+    <string name="fair">Fair</string>
+    <string name="bad">Bad</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="alert_message">Do you wish to exit quiz?\nAll the progress will be lost!</string>
+    <string name="click_here">Click Here!</string>
+    <string name="continue_text">Continue</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+    <string name="score">Score</string>
+    <string name="time">Time</string>
+    <string name="level">Level</string>
+    <string name="level_count">[4]\nLevel</string>
+    <string name="network_failure">Network Connectivity Failure</string>
+    <string name="oops_something_went_wrong">Oops! Something went wrong..Please try again later</string>
+    <string name="login_password_mandatory">Username And Password Are Mandatory</string>
+    <string name="skip">Skip</string>
+    <string name="start_quiz">Start Quiz</string>
+    <string name="no_internet_title">Internet Offline.</string>
+    <string name="no_internet_message">Internet Connection seems to be Offline.</string>
+    <string name="select_cousine">Select A Cuisine</string>
+    <string name="select_menu_item">Select a Menu Item</string>
+    <string name="select_a_product">Select a Product</string>
+    <string name="select_a_sub_category">Select a sub category</string>
+    <string name="rate_food">Rate Food</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_mobile">Enter Mobile Number</string>
+    <string name="enter_either_mobile_number_or_mail_id">Enter Either Your Mobile Number or Email Id</string>
+    <string name="enter_ten_digit_mobile_number">Enter 10 digit Mobile Number</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_valid_email">Enter Valid Email Id</string>
+    <string name="select_birthday">Select Birthday</string>
+    <string name="select_anniversary">Select Anniversary</string>
+    <string name="select_answer_one">Select Answer for Question One</string>
+    <string name="select_answer_two">Select Answer for Question Two</string>
+    <string name="select_answer_three">Select Answer for Question Three</string>
+    <string name="select_answer_four">Select Answer for Question Four</string>
+    <string name="rate_racipe">Rate Our Recipe</string>
+    <string name="rate_restaurant">Rate Our Restaurant</string>
+    <string name="updateMenuTxt">Update Menu</string>
+    <string name="currentVersionTxt">Current Version : %d</string>
+    <string name="versionTxt">Version : %d</string>
+    <string name="menuUpdateAvailableTxt">Menu update available</string>
+    <string name="menuUpdatingTxt">Menu is updating now</string>
+    <string name="menuUpdatedTxt">Menu is updated</string>
+    <string name="noUpdateAvailableTxt">No update available</string>
+    <string name="updateAppPopupTxt">We have got a new update. Press update to get new version.</string>
+    <string-array name="cousins">
+        <item>Cousine 1</item>
+        <item>Cousine 2</item>
+        <item>Cousine 3</item>
+        <item>Cousine 4</item>
+    </string-array>
+    <string-array name="menu_item">
+        <item>Select Sub Category</item>
+        <item>Menu Item 1</item>
+        <item>Menu Item 2</item>
+        <item>Menu Item 3</item>
+        <item>Menu Item 4</item>
+    </string-array>
+    <string name="please_confirm_password">Please confirm password to Logout.</string>
+    <string name="please_confirm_password_to_continue">Please confirm password to Continue.</string>
+    <string name="please_enter_password">Please Enter Password</string>
+    <string name="please_enter_correct_password">Please Enter Correct Password</string>
+    <string name="no_thanks">No Thanks</string>
+    <string name="wanna_tell_us_your_birthday">Wanna tell us your Birthday or Anniversary? We might send you a gift!</string>
+    <string name="are_you_sure_you_want_to_exit">Are you sure you want to exit?</string>
+    <string name="please_check_your_internet_connection">Please check your internet connection.</string>
+    <string name="try_again">Try Again</string>
+    <string name="invalid_email_id">Invalid Email Id</string>
+    <string name="you_rated_the_recipe_successfully">You Rated The Recipe Successfully.</string>
+    <string name="you_rated_the_restaurant_successfully">You Rated The Restaurant Successfully.</string>
+    <string name="select_a_food_type">Select A Food Type</string>
+    <string name="select_a_food_item">Select A Food Item</string>
+    <string name="your_detail_has_been_uploaded">Your Detail Has Been Uploaded Successfully, We Will Get Back To You.</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_video_view">VideoViewActivity</string>
+    <string name="title_activity_brand_promotion">BrandPromotionActivity</string>
+    <string name="please_wait_while">Please wait while downloading video</string>
+</resources>

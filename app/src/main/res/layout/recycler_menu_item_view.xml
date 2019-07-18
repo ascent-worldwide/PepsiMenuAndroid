@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/sixteen_dp"
+    card_view:cardCornerRadius="@dimen/three_dp"
+    card_view:cardElevation="@dimen/three_dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_menu_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/product_placeholder" />
+
+        <com.clairvoyant.naijamenu.fonts.RobotoLightTextView
+            android:id="@+id/tv_menu_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_menu_image"
+            android:background="@color/black_fifty_percent"
+            android:ellipsize="end"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="@dimen/ten_dp"
+            android:singleLine="true"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/eighteen_sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

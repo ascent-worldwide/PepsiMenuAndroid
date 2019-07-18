@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/dialog_spacer" />
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:padding="@dimen/sixteen_dp"
+            card_view:cardCornerRadius="@dimen/five_dp"
+            card_view:cardElevation="@dimen/ten_dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
+                    android:id="@+id/message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="@dimen/twenty_dp"
+                    android:gravity="center"
+                    android:text="Ooops....!! You didn’t clear the\nLevel2"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="@dimen/thirty_sp" />
+
+                <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
+                    android:id="@+id/continue_game"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/forty_dp"
+                    android:background="@drawable/blue_background_deep_rounded"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/sixteen_dp"
+                    android:paddingLeft="@dimen/forty_dp"
+                    android:paddingRight="@dimen/forty_dp"
+                    android:paddingTop="@dimen/sixteen_dp"
+                    android:text="@string/continue_text"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/twenty_four_sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/level_failed_icon" />
+
+</RelativeLayout>

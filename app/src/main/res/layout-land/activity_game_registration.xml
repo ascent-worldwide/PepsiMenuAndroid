@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home_screen_bg"
+    android:fillViewport="true">
+
+    <RelativeLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/home_screen_bg"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/pepsi_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/pepsi_icon" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/sixteen_dp"
+            android:background="@color/white"
+            card_view:cardCornerRadius="@dimen/three_dp"
+            card_view:cardElevation="@dimen/three_dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/sixteen_dp"
+                android:orientation="vertical">
+
+                <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/twenty_dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:padding="@dimen/ten_dp"
+                    android:text="@string/game_registration_note"
+                    android:textColor="@color/black"
+                    android:textSize="32sp" />
+
+                <com.clairvoyant.naijamenu.fonts.RobotoRegularEditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/ten_dp"
+                    android:background="@drawable/game_play_registeration_edittext_selector"
+                    android:drawableLeft="@drawable/gr_name"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:hint="@string/name"
+                    android:maxLength="50"
+                    android:padding="@dimen/ten_dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/light_gray"
+                    android:textSize="@dimen/twenty_four_sp"
+                    android:textStyle="italic" />
+
+                <com.clairvoyant.naijamenu.fonts.RobotoRegularEditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/ten_dp"
+                    android:background="@drawable/border_all_red_rounded"
+                    android:drawableLeft="@drawable/gr_email"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:padding="@dimen/ten_dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/light_gray"
+                    android:textSize="@dimen/twenty_four_sp"
+                    android:textStyle="italic" />
+
+                <com.clairvoyant.naijamenu.fonts.RobotoRegularEditText
+                    android:id="@+id/et_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/ten_dp"
+                    android:background="@drawable/border_all_red_rounded"
+                    android:drawableLeft="@drawable/gr_phone"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:hint="@string/phone_number"
+                    android:inputType="phone"
+                    android:maxLength="12"
+                    android:padding="@dimen/ten_dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/light_gray"
+                    android:textSize="@dimen/twenty_four_sp"
+                    android:textStyle="italic" />
+
+                <com.clairvoyant.naijamenu.fonts.RobotoRegularButton
+                    android:id="@+id/btn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/twenty_dp"
+                    android:background="@drawable/red_background_rounded"
+                    android:padding="@dimen/twelve_dp"
+                    android:text="@string/submit"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/twenty_four_sp" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <include
+            android:id="@+id/progress_view_quiz_winner"
+            layout="@layout/progress_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</ScrollView>
