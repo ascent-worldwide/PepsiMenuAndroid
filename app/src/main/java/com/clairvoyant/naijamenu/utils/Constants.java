@@ -56,8 +56,12 @@ public class Constants {
     public static final String MENU_VERSION = "menu_version";
     // intent params
     public static final String UPDATED_MENU_VERSION = "updatedMenuVersion";
+    public static final String DOWNLOAD_CHANNEL_ID = "pepsi_menu_download_channel";
+    public static final int DOWNLOAD_NOTIFICATION_ID = 1;
     public static boolean IS_VIDEO_DOWNLOADED = false;
     public static int VOLLEY_TIMEOUT = 30000;
     public static int VOLLEY_MAX_RETRIES = 1;
     public static float VOLLEY_BACKUP_MULT = 2;
+
+
 }

@@ -2,6 +2,7 @@ package com.clairvoyant.naijamenu;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -38,18 +39,18 @@ public class RateFragmentActivity extends AppCompatActivity {
 
         Utils.setOrientation(mContext);
 
-        toolbar = (Toolbar) findViewById(R.id.menu_toolbar);
+        toolbar = findViewById(R.id.menu_toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             toolbar.setLogo(R.drawable.header_logo);
-            RobotoRegularTextView title = (RobotoRegularTextView) toolbar.findViewById(R.id.title);
+            RobotoRegularTextView title = toolbar.findViewById(R.id.title);
             title.setText(R.string.app_name);
             getSupportActionBar().setTitle("");
         }
-        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabs = findViewById(R.id.tabs);
         tabs.setBackgroundColor(getResources().getColor(R.color.orange));
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mViewPager = findViewById(R.id.viewpager);
 
 //		Intent intent = getIntent();
 //		if (intent != null) {
@@ -80,7 +81,7 @@ public class RateFragmentActivity extends AppCompatActivity {
 
     public class MenuViewPagerAdapter extends FragmentPagerAdapter {
 
-        public MenuViewPagerAdapter(FragmentManager fm) {
+        MenuViewPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -88,11 +89,9 @@ public class RateFragmentActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    RateRecipeFragment mRateRecipeFragment = new RateRecipeFragment();
-                    return mRateRecipeFragment;
+                    return new RateRecipeFragment();
                 case 1:
-                    RateRestaurantFragment mRestaurantFragment = new RateRestaurantFragment();
-                    return mRestaurantFragment;
+                    return new RateRestaurantFragment();
             }
 
             return null;
@@ -109,10 +108,11 @@ public class RateFragmentActivity extends AppCompatActivity {
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             try {
                 if (position >= getCount()) {
                     FragmentManager manager = ((Fragment) object).getFragmentManager();
+                    assert manager != null;
                     FragmentTransaction transanction = manager.beginTransaction();
                     transanction.remove((Fragment) object);
                     transanction.commit();

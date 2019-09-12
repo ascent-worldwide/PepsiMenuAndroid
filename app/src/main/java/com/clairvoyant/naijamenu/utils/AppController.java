@@ -1,6 +1,5 @@
 package com.clairvoyant.naijamenu.utils;
 
-import android.app.Application;
 import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
 
@@ -8,8 +7,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;

@@ -1,5 +1,6 @@
 package com.clairvoyant.naijamenu;
 
+import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
@@ -12,6 +13,8 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.IOException;
 
+
+@SuppressLint("Registered")
 public class GcmRegisterationTokenService extends IntentService {
 
     private static final String TAG = GcmRegisterationTokenService.class.getSimpleName();
@@ -22,7 +25,7 @@ public class GcmRegisterationTokenService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        getGCMToken();
+//        getGCMToken();
     }
 
     private void getGCMToken() {

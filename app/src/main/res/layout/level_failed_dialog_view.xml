@@ -45,10 +45,10 @@
                     android:layout_margin="@dimen/forty_dp"
                     android:background="@drawable/blue_background_deep_rounded"
                     android:gravity="center"
-                    android:paddingBottom="@dimen/sixteen_dp"
                     android:paddingLeft="@dimen/forty_dp"
-                    android:paddingRight="@dimen/forty_dp"
                     android:paddingTop="@dimen/sixteen_dp"
+                    android:paddingRight="@dimen/forty_dp"
+                    android:paddingBottom="@dimen/sixteen_dp"
                     android:text="@string/continue_text"
                     android:textColor="@color/white"
                     android:textSize="@dimen/twenty_four_sp" />

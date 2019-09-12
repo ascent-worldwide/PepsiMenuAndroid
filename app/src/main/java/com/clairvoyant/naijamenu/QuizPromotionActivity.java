@@ -42,14 +42,8 @@ public class QuizPromotionActivity extends AppCompatActivity {
         if (!Utils.isOnline(mContext)) {
             setContentView(R.layout.no_network_activity);
             Utils.setOrientation(mContext);
-            RobotoRegularButton tryAgain = (RobotoRegularButton) findViewById(R.id.try_again);
-            tryAgain.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View arg0) {
-                    reload();
-                }
-            });
+            RobotoRegularButton tryAgain = findViewById(R.id.try_again);
+            tryAgain.setOnClickListener(arg0 -> reload());
 
         } else {
             setContentView(R.layout.activity_quiz_promotion);
@@ -57,8 +51,8 @@ public class QuizPromotionActivity extends AppCompatActivity {
             getQuizPromo();
             Intent intent = getIntent();
             if (intent != null) {
-                image = (ImageView) findViewById(R.id.imageView);
-                TextView startQuiz = (TextView) findViewById(R.id.start_quiz);
+                image = findViewById(R.id.imageView);
+                TextView startQuiz = findViewById(R.id.start_quiz);
                 final int menuId = getIntent().getIntExtra("MENU", 0);
                 startQuiz.setOnClickListener(new OnClickListener() {
 
@@ -116,7 +110,7 @@ public class QuizPromotionActivity extends AppCompatActivity {
                         QuizPromotionResponse quizResponse = gson.fromJson(response, QuizPromotionResponse.class);
                         if (quizResponse.getStatus().equals("true")) {
                             String url = quizResponse.getContest_banner();
-                           // Picasso.with(mContext).load(url).placeholder(R.drawable.promo_placeholder).into(image);
+                            // Picasso.with(mContext).load(url).placeholder(R.drawable.promo_placeholder).into(image);
                             Utils.renderImage(mContext, url, image);
                         } else {
 

@@ -97,8 +97,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/twelve_dp"
                         android:background="@drawable/red_button_selector"
-                        android:paddingBottom="@dimen/twenty_dp"
                         android:paddingTop="@dimen/twenty_dp"
+                        android:paddingBottom="@dimen/twenty_dp"
                         android:text="@string/sign_in"
                         android:textColor="@color/white"
                         android:textSize="@dimen/thirty_sp" />

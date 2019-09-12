@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 
 import com.clairvoyant.naijamenu.bean.RateRecipeBean;
 import com.clairvoyant.naijamenu.bean.RateRestaurantBean;
@@ -15,6 +16,7 @@ public class DatabaseHelper {
 
     public static Cursor cursor = null;
     public static ContentResolver resolver = null;
+    private static String TAG = DatabaseHelper.class.getSimpleName();
     Context mContext = null;
 
     /**
@@ -74,7 +76,7 @@ public class DatabaseHelper {
                 DatabaseConstants.COLUMN_CATEGORY_ID + "= ?",
                 new String[]{categoryId});
 
-        System.out.println(" Deleted prod from Cart " + count);
+        Log.d(TAG, " Deleted prod from Cart " + count);
     }
 
     /**
@@ -86,9 +88,7 @@ public class DatabaseHelper {
     public static void insertRecipeCategories(Context context, String recipeCategories) {
         ContentValues values = new ContentValues();
         values.put(DatabaseConstants.COLUMN_RECIPE_CATEGORIES, recipeCategories);
-
-        context.getContentResolver()
-                .insert(DatabaseConstants.URI_TABLENAME_RECIPE_CATEGORY, values);
+        context.getContentResolver().insert(DatabaseConstants.URI_TABLENAME_RECIPE_CATEGORY, values);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.clairvoyant.naijamenu.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +19,7 @@ import java.util.List;
 public class SlidingDrawerAdapter extends ArrayAdapter<DrawerBean> {
     private Context mContext;
     private LayoutInflater mInflater;
-    private List<DrawerBean> list = null;
-    private ViewHolder viewHolder;
+    private List<DrawerBean> list;
 
     public SlidingDrawerAdapter(Context context, int resource, List<DrawerBean> list) {
         super(context, resource, list);
@@ -28,13 +28,15 @@ public class SlidingDrawerAdapter extends ArrayAdapter<DrawerBean> {
         mInflater = LayoutInflater.from(mContext);
     }
 
+    @NonNull
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
+        ViewHolder viewHolder;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.slide_menu_row, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.itemIcon = (ImageView) convertView.findViewById(R.id.ivImg);
-            viewHolder.itemName = (TextView) convertView.findViewById(R.id.tvName);
+            viewHolder.itemIcon = convertView.findViewById(R.id.ivImg);
+            viewHolder.itemName = convertView.findViewById(R.id.tvName);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();

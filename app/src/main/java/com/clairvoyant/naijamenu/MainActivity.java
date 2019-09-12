@@ -24,7 +24,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         setContentView(R.layout.activity_main);
         Utils.setOrientation(mContext);
         PreferencesUtils.setItemPosition(MainActivity.this, -1);
-        toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        toolbar = findViewById(R.id.main_toolbar);
 
         if (toolbar != null) {
             setSupportActionBar(toolbar);
@@ -93,11 +92,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
             }
 
             // toolbar.setLogo(R.drawable.header_logo);
-            ImageView logo = (ImageView) toolbar.findViewById(R.id.logo);
+            ImageView logo = toolbar.findViewById(R.id.logo);
 
-            Glide.with(mContext).load(PreferencesUtils.getString(mContext, Constants.RESTAURANT_LOGO)).asBitmap().centerCrop().placeholder(R.drawable.pepsi_logo).fitCenter().into(logo);
+            Glide.with(mContext).load(PreferencesUtils.getString(mContext, Constants.RESTAURANT_LOGO)).centerCrop().placeholder(R.drawable.pepsi_logo).fitCenter().into(logo);
 
-            title = (RobotoRegularTextView) toolbar.findViewById(R.id.title);
+            title = toolbar.findViewById(R.id.title);
 
             int restaurantLogoWithText = PreferencesUtils.getInt(mContext, Constants.RESTAURANT_LOGO_WITH_TEXT);
 
@@ -127,11 +126,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     }
 
     private void initializeView(int passedPos) {
-        listView = (ListView) findViewById(R.id.drawer_list);
-        drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer);
-        listbox = (RelativeLayout) findViewById(R.id.listbox);
-        logout = (RelativeLayout) findViewById(R.id.logoutbox);
-        // tvLogout = (TextView)findViewById(R.id.tvLogout);
+        listView = findViewById(R.id.drawer_list);
+        drawerLayout = findViewById(R.id.navigation_drawer);
+        listbox = findViewById(R.id.listbox);
+        logout = findViewById(R.id.logoutbox);
+        // tvLogout =findViewById(R.id.tvLogout);
 
         List<DrawerBean> list = getDraweeList();
         mAdapter = new SlidingDrawerAdapter(mContext, R.layout.slide_menu_row, list);
@@ -171,8 +170,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
                 // LinearLayout view1 =
                 // (LinearLayout)listView.getChildAt(position);
-                TextView tvName = (TextView) view.findViewById(R.id.tvName);
-                ImageView ivImg = (ImageView) view.findViewById(R.id.ivImg);
+                TextView tvName = view.findViewById(R.id.tvName);
+                ImageView ivImg = view.findViewById(R.id.ivImg);
 
                 view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
 
@@ -343,40 +342,33 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.logout_alert_dialog_view);
-        final ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.progressBar);
-        RobotoRegularTextView messageView = (RobotoRegularTextView) dialog.findViewById(R.id.message);
+        RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(resource);
-        RobotoRegularTextView cancel = (RobotoRegularTextView) dialog.findViewById(R.id.cancel);
-        RobotoRegularTextView ok = (RobotoRegularTextView) dialog.findViewById(R.id.ok);
-        final RobotoRegularEditText etPassword = (RobotoRegularEditText) dialog.findViewById(R.id.etPassword);
-        cancel.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideSoftKeyboard();
-                dialog.dismiss();
-            }
+        RobotoRegularTextView cancel = dialog.findViewById(R.id.cancel);
+        RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
+        final RobotoRegularEditText etPassword = dialog.findViewById(R.id.etPassword);
+        cancel.setOnClickListener(v -> {
+            hideSoftKeyboard();
+            dialog.dismiss();
         });
 
-        ok.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideSoftKeyboard(dialog);
-                String password = etPassword.getText().toString().trim();
-                String userPassword = PreferencesUtils.getString(mContext, Constants.PASSWORD, "");
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(mContext, getString(R.string.please_enter_password), Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (!userPassword.equals(password)) {
-                    Toast.makeText(mContext, getString(R.string.please_enter_correct_password), Toast.LENGTH_SHORT)
-                            .show();
-                    return;
-                }
-                logout();
-                Intent intent = new Intent(mContext, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                MainActivity.this.finish();
+        ok.setOnClickListener(v -> {
+            hideSoftKeyboard(dialog);
+            String password = etPassword.getText().toString().trim();
+            String userPassword = PreferencesUtils.getString(mContext, Constants.PASSWORD, "");
+            if (TextUtils.isEmpty(password)) {
+                Toast.makeText(mContext, getString(R.string.please_enter_password), Toast.LENGTH_SHORT).show();
+                return;
+            } else if (!userPassword.equals(password)) {
+                Toast.makeText(mContext, getString(R.string.please_enter_correct_password), Toast.LENGTH_SHORT)
+                        .show();
+                return;
             }
+            logout();
+            Intent intent = new Intent(mContext, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            MainActivity.this.finish();
         });
         dialog.show();
         hideSoftKeyboard(dialog);
@@ -403,8 +395,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     @Override
     public void onDialogSuccess(View view, int position, int updatedMenuVersion) {
-        TextView tvName = (TextView) view.findViewById(R.id.tvName);
-        ImageView ivImg = (ImageView) view.findViewById(R.id.ivImg);
+        TextView tvName = view.findViewById(R.id.tvName);
+        ImageView ivImg = view.findViewById(R.id.ivImg);
         setIcon(ivImg, R.drawable.update_menu_unselected, tvName, view);
         PreferencesUtils.setItemPosition(MainActivity.this, position);
         title.setText(R.string.updateMenuTxt);

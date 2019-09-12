@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -69,7 +70,7 @@ public class RateRestaurantFragment extends Fragment implements OnClickListener 
     private Dialog noInternetDialog = null;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext = getActivity();
         if (!Utils.isOnline(mContext)) {
             String surveyQuestionJSON = DatabaseHelper.getSurveyQuestionsJson(mContext);
@@ -80,14 +81,8 @@ public class RateRestaurantFragment extends Fragment implements OnClickListener 
                 parseSurveyResponse(surveyQuestionJSON, surveyModel, false);
             } else {
                 restaurantView = inflater.inflate(R.layout.no_network_activity, container, false);
-                RobotoRegularButton tryAgain = (RobotoRegularButton) restaurantView.findViewById(R.id.try_again);
-                tryAgain.setOnClickListener(new OnClickListener() {
-
-                    @Override
-                    public void onClick(View arg0) {
-                        reload();
-                    }
-                });
+                RobotoRegularButton tryAgain = restaurantView.findViewById(R.id.try_again);
+                tryAgain.setOnClickListener(arg0 -> reload());
             }
         } else {
             restaurantView = inflater.inflate(R.layout.fragment_rate_restaurant, container, false);
@@ -111,42 +106,42 @@ public class RateRestaurantFragment extends Fragment implements OnClickListener 
     private void initializeViews(View view) {
 
         radios = new RadioGroup[4];
-        radios[0] = (RadioGroup) view.findViewById(R.id.rgOne);
-        radios[1] = (RadioGroup) view.findViewById(R.id.rgTwo);
-        radios[2] = (RadioGroup) view.findViewById(R.id.rgThree);
-        radios[3] = (RadioGroup) view.findViewById(R.id.rgFour);
+        radios[0] = view.findViewById(R.id.rgOne);
+        radios[1] = view.findViewById(R.id.rgTwo);
+        radios[2] = view.findViewById(R.id.rgThree);
+        radios[3] = view.findViewById(R.id.rgFour);
 
-        ansOneRadioOne = (RadioButton) view.findViewById(R.id.ans_one_radio_one);
-        ansOneRadioTwo = (RadioButton) view.findViewById(R.id.ans_one_radio_two);
-        ansOneRadioThree = (RadioButton) view.findViewById(R.id.ans_one_radio_three);
-        ansOneRadioFour = (RadioButton) view.findViewById(R.id.ans_one_radio_four);
+        ansOneRadioOne = view.findViewById(R.id.ans_one_radio_one);
+        ansOneRadioTwo = view.findViewById(R.id.ans_one_radio_two);
+        ansOneRadioThree = view.findViewById(R.id.ans_one_radio_three);
+        ansOneRadioFour = view.findViewById(R.id.ans_one_radio_four);
 
-        ansTwoRadioOne = (RadioButton) view.findViewById(R.id.ans_two_radio_one);
-        ansTwoRadioTwo = (RadioButton) view.findViewById(R.id.ans_two_radio_two);
-        ansTwoRadioThree = (RadioButton) view.findViewById(R.id.ans_two_radio_three);
-        ansTwoRadioFour = (RadioButton) view.findViewById(R.id.ans_two_radio_four);
+        ansTwoRadioOne = view.findViewById(R.id.ans_two_radio_one);
+        ansTwoRadioTwo = view.findViewById(R.id.ans_two_radio_two);
+        ansTwoRadioThree = view.findViewById(R.id.ans_two_radio_three);
+        ansTwoRadioFour = view.findViewById(R.id.ans_two_radio_four);
 
-        ansThreeRadioOne = (RadioButton) view.findViewById(R.id.ans_three_radio_one);
-        ansThreeRadioTwo = (RadioButton) view.findViewById(R.id.ans_three_radio_two);
-        ansThreeRadioThree = (RadioButton) view.findViewById(R.id.ans_three_radio_three);
-        ansThreeRadioFour = (RadioButton) view.findViewById(R.id.ans_three_radio_four);
+        ansThreeRadioOne = view.findViewById(R.id.ans_three_radio_one);
+        ansThreeRadioTwo = view.findViewById(R.id.ans_three_radio_two);
+        ansThreeRadioThree = view.findViewById(R.id.ans_three_radio_three);
+        ansThreeRadioFour = view.findViewById(R.id.ans_three_radio_four);
 
-        ansFourRadioOne = (RadioButton) view.findViewById(R.id.ans_four_radio_one);
-        ansFourRadioTwo = (RadioButton) view.findViewById(R.id.ans_four_radio_two);
-        ansFourRadioThree = (RadioButton) view.findViewById(R.id.ans_four_radio_three);
-        ansFourRadioFour = (RadioButton) view.findViewById(R.id.ans_four_radio_four);
+        ansFourRadioOne = view.findViewById(R.id.ans_four_radio_one);
+        ansFourRadioTwo = view.findViewById(R.id.ans_four_radio_two);
+        ansFourRadioThree = view.findViewById(R.id.ans_four_radio_three);
+        ansFourRadioFour = view.findViewById(R.id.ans_four_radio_four);
 
-        name = (RobotoRegularEditText) view.findViewById(R.id.rate_name);
-        mobileNumber = (RobotoRegularEditText) view.findViewById(R.id.rate_mobile);
-        email = (RobotoRegularEditText) view.findViewById(R.id.rate_email);
-        birthday = (RobotoRegularTextView) view.findViewById(R.id.birthday);
-        anniversary = (RobotoRegularTextView) view.findViewById(R.id.anniversary);
-        btnSubmit = (RobotoRegularButton) view.findViewById(R.id.btn_submit);
-        progressView = (RelativeLayout) view.findViewById(R.id.progress_view_restaurant);
-        questionOne = (RobotoRegularTextView) view.findViewById(R.id.question_one);
-        questionTwo = (RobotoRegularTextView) view.findViewById(R.id.question_two);
-        questionThree = (RobotoRegularTextView) view.findViewById(R.id.question_three);
-        questionFour = (RobotoRegularTextView) view.findViewById(R.id.question_four);
+        name = view.findViewById(R.id.rate_name);
+        mobileNumber = view.findViewById(R.id.rate_mobile);
+        email = view.findViewById(R.id.rate_email);
+        birthday = view.findViewById(R.id.birthday);
+        anniversary = view.findViewById(R.id.anniversary);
+        btnSubmit = view.findViewById(R.id.btn_submit);
+        progressView = view.findViewById(R.id.progress_view_restaurant);
+        questionOne = view.findViewById(R.id.question_one);
+        questionTwo = view.findViewById(R.id.question_two);
+        questionThree = view.findViewById(R.id.question_three);
+        questionFour = view.findViewById(R.id.question_four);
         btnSubmit.setOnClickListener(this);
         birthday.setOnClickListener(this);
         anniversary.setOnClickListener(this);
@@ -317,7 +312,7 @@ public class RateRestaurantFragment extends Fragment implements OnClickListener 
 
             DatabaseHelper.insertRateRestaurantRequestJSOnDate(mContext, paramStr.toString());
             // String rateRestaurantString = DatabaseHelper.getRateRestaurantRequestJSOnDate(mContext);
-            // System.out.println("rateRestaurantString=" + rateRestaurantString);
+            // Log.d(TAG,"rateRestaurantString=" + rateRestaurantString);
             Toast.makeText(mContext, getString(R.string.you_rated_the_restaurant_successfully), Toast.LENGTH_SHORT).show();
             goToHomeActivity();
         }
@@ -333,8 +328,8 @@ public class RateRestaurantFragment extends Fragment implements OnClickListener 
     private void handleNoInternetCondition(final Dialog dialog) {
         if (dialog != null) {
             dialog.show();
-            RobotoRegularTextView tvTryAgain = (RobotoRegularTextView) dialog.findViewById(R.id.tvTryAgain);
-            RobotoRegularTextView ok = (RobotoRegularTextView) dialog.findViewById(R.id.ok);
+            RobotoRegularTextView tvTryAgain = dialog.findViewById(R.id.tvTryAgain);
+            RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
             tvTryAgain.setOnClickListener(new OnClickListener() {
 
                 @Override
@@ -585,26 +580,16 @@ public class RateRestaurantFragment extends Fragment implements OnClickListener 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.birthday_or_aniversary_alert_dialog_view);
-        RobotoRegularTextView messageView = (RobotoRegularTextView) dialog.findViewById(R.id.message);
+        RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(messsage);
-        RobotoRegularTextView noThanks = (RobotoRegularTextView) dialog.findViewById(R.id.tvNoThanks);
-        RobotoRegularTextView ok = (RobotoRegularTextView) dialog.findViewById(R.id.ok);
-        noThanks.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                isDialogShown = true;
-            }
+        RobotoRegularTextView noThanks = dialog.findViewById(R.id.tvNoThanks);
+        RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
+        noThanks.setOnClickListener(v -> {
+            dialog.dismiss();
+            isDialogShown = true;
         });
 
-        ok.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        ok.setOnClickListener(v -> dialog.dismiss());
         dialog.show();
     }
 }

@@ -1,5 +1,6 @@
 package com.clairvoyant.naijamenu;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,7 +11,6 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -31,7 +31,6 @@ import com.clairvoyant.naijamenu.bean.MenuCategoryOuterBean;
 import com.clairvoyant.naijamenu.bean.ProductBean;
 import com.clairvoyant.naijamenu.bean.ProductBeanOuter;
 import com.clairvoyant.naijamenu.fonts.RobotoRegularButton;
-import com.clairvoyant.naijamenu.fonts.RobotoRegularTextView;
 import com.clairvoyant.naijamenu.utils.AppController;
 import com.clairvoyant.naijamenu.utils.BasicImageDownloader;
 import com.clairvoyant.naijamenu.utils.BasicImageDownloader.ImageError;
@@ -46,6 +45,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -80,31 +80,28 @@ public class UpdateMenuFragment extends Fragment {
      * @param container
      */
     private void initializeViews(View view, LayoutInflater inflater, ViewGroup container) {
-        mTxtCurrentversion = (RobotoRegularTextView) view.findViewById(R.id.txtCurrentversion);
-        mTxtUpdateMenuInfo = (RobotoRegularTextView) view.findViewById(R.id.txtUpdateMenuInfo);
-        btnUpdateMenu = (RobotoRegularButton) view.findViewById(R.id.btnUpdateMenu);
-        mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        btnUpdateMenu.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mTxtCurrentversion = view.findViewById(R.id.txtCurrentversion);
+        mTxtUpdateMenuInfo = view.findViewById(R.id.txtUpdateMenuInfo);
+        btnUpdateMenu = view.findViewById(R.id.btnUpdateMenu);
+        mProgressBar = view.findViewById(R.id.progressBar);
+        btnUpdateMenu.setOnClickListener(v -> {
 
-			/*	new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						mProgressBar.setVisibility(View.GONE);
-					}
-				}, 2000);*/
-
-                if (Utils.isOnline(mContext)) {
-                    btnUpdateMenu.setAlpha(.5f);
-                    btnUpdateMenu.setEnabled(false);
-                    mTxtCurrentversion.setText(String.format(getResources().getString(R.string.versionTxt), updatedMenuVersion));
-                    mTxtUpdateMenuInfo.setText(getResources().getString(R.string.menuUpdatingTxt));
-                    mProgressBar.setVisibility(View.VISIBLE);
-                    getMenuItem(Constants.CATEGORY_API);
-                } else {
-                    Toast.makeText(mContext, R.string.network_failure, Toast.LENGTH_SHORT).show();
+        /*	new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mProgressBar.setVisibility(View.GONE);
                 }
+            }, 2000);*/
+
+            if (Utils.isOnline(mContext)) {
+                btnUpdateMenu.setAlpha(.5f);
+                btnUpdateMenu.setEnabled(false);
+                mTxtCurrentversion.setText(String.format(getResources().getString(R.string.versionTxt), updatedMenuVersion));
+                mTxtUpdateMenuInfo.setText(getResources().getString(R.string.menuUpdatingTxt));
+                mProgressBar.setVisibility(View.VISIBLE);
+                getMenuItem(Constants.CATEGORY_API);
+            } else {
+                Toast.makeText(mContext, R.string.network_failure, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -133,13 +130,8 @@ public class UpdateMenuFragment extends Fragment {
 
         } else {
             mUpdateManuView = inflater.inflate(R.layout.no_network_activity, container, false);
-            RobotoRegularButton tryAgain = (RobotoRegularButton) mUpdateManuView.findViewById(R.id.try_again);
-            tryAgain.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View arg0) {
-                    reload();
-                }
-            });
+            RobotoRegularButton tryAgain = mUpdateManuView.findViewById(R.id.try_again);
+            tryAgain.setOnClickListener(arg0 -> reload());
         }
     }
 
@@ -286,6 +278,7 @@ public class UpdateMenuFragment extends Fragment {
     /**
      * Method to save the data into database with images
      */
+    @SuppressLint("StaticFieldLeak")
     private void saveAllMenuIntoDatabase(final AllMenuCategoryOuterBean pAllMenuCategoryOuterBean, final Gson gson) {
         // start the asyntask to insert the data into database table
         new AsyncTask<Void, Void, Void>() {
@@ -308,9 +301,7 @@ public class UpdateMenuFragment extends Fragment {
                         for (ProductBean productBean : productBeanOuter.getProductlist()) {
                             if (productBean != null) {
                                 setUrlImages.add(productBean.getProductUrl());
-                                for (String strDetailUrl : productBean.getProductDetailUrl()) {
-                                    setUrlImages.add(strDetailUrl);
-                                }
+                                Collections.addAll(setUrlImages, productBean.getProductDetailUrl());
                             }
                             //break;
                         }

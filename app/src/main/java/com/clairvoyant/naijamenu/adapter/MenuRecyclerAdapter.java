@@ -3,6 +3,7 @@ package com.clairvoyant.naijamenu.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
         });
     }
 
+    @NonNull
     @Override
     public MenuViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View categoryView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_menu_item_view, viewGroup, false);
@@ -61,12 +63,12 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
 
     class MenuViewHolder extends RecyclerView.ViewHolder {
 
-        protected ImageView menuImage;
-        protected RobotoLightTextView menuName;
+        private ImageView menuImage;
+        private RobotoLightTextView menuName;
 
-        public MenuViewHolder(View view) {
+        private MenuViewHolder(View view) {
             super(view);
-            menuImage = (ImageView) view.findViewById(R.id.iv_menu_image);
+            menuImage = view.findViewById(R.id.iv_menu_image);
             menuName = (RobotoLightTextView) view.findViewById(R.id.tv_menu_name);
         }
     }

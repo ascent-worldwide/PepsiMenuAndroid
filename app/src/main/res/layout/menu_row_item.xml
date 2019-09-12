@@ -22,19 +22,19 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
             android:layout_marginLeft="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/ten_dp"
             android:layout_marginRight="@dimen/ten_dp"
-            android:layout_marginTop="@dimen/ten_dp">
+            android:layout_marginBottom="2dp">
 
             <TextView
                 android:id="@+id/product_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
-                android:maxLines="2"
                 android:layout_toLeftOf="@+id/product_type"
                 android:ellipsize="end"
+                android:maxLines="2"
                 android:singleLine="true"
                 android:textColor="@color/dark_gray"
                 android:textSize="@dimen/twenty_sp" />
@@ -53,9 +53,9 @@
             android:id="@+id/product_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/five_dp"
             android:layout_marginLeft="@dimen/ten_dp"
             android:layout_marginRight="@dimen/ten_dp"
+            android:layout_marginBottom="@dimen/five_dp"
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/medium_gray"
@@ -67,12 +67,12 @@
             android:layout_margin="@dimen/ten_dp">
 
             <TextView
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
                 android:id="@+id/price"
-                android:layout_marginRight="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
                 android:layout_toLeftOf="@+id/chilli"
                 android:drawableLeft="@drawable/naira_icon"
                 android:ellipsize="end"
@@ -83,10 +83,10 @@
 
             <LinearLayout
                 android:id="@+id/chilli"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
 
                 <ImageView
                     android:id="@+id/spice_level1"

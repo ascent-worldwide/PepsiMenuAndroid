@@ -17,7 +17,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -92,14 +91,8 @@ public class ProductsFragment extends Fragment {
         } else {
             isInternetConnectionLayoutVisible = true;
             menuView = inflater.inflate(R.layout.no_network_activity, container, false);
-            RobotoRegularButton tryAgain = (RobotoRegularButton) menuView.findViewById(R.id.try_again);
-            tryAgain.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View arg0) {
-                    reload();
-                }
-            });
+            RobotoRegularButton tryAgain = menuView.findViewById(R.id.try_again);
+            tryAgain.setOnClickListener(arg0 -> reload());
 
         }
 
@@ -108,9 +101,9 @@ public class ProductsFragment extends Fragment {
 
     private void initialiseViews(LayoutInflater inflater, ViewGroup container) {
         menuView = inflater.inflate(R.layout.menu_category_fragment, container, false);
-        progressView = (RelativeLayout) menuView.findViewById(R.id.progress_view_menu);
-        rlRootLayout = (RelativeLayout) menuView.findViewById(R.id.rlRootLayout);
-        menuRecycler = (RecyclerView) menuView.findViewById(R.id.menu_recycler);
+        progressView = menuView.findViewById(R.id.progress_view_menu);
+        rlRootLayout = menuView.findViewById(R.id.rlRootLayout);
+        menuRecycler = menuView.findViewById(R.id.menu_recycler);
         menuRecycler.setHasFixedSize(true);
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
@@ -180,7 +173,7 @@ public class ProductsFragment extends Fragment {
                             DatabaseHelper.insertProductData(mContext, response, categoryId);
                             String key = String.valueOf(categoryId);
                             // PreferencesUtils.putString(mContext, key, response);
-                            // System.out.println("key="+key+" "+"value="+response);
+                            // Log.d(TAG,"key="+key+" "+"value="+response);
                             Log.i(String.valueOf(categoryId), DatabaseHelper.getProductDataByCategoryId(mContext, String.valueOf(categoryId)));
                             parsingLogic(productBeanOuter);
                         }
@@ -232,7 +225,7 @@ public class ProductsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(isInternetConnectionLayoutVisible){
+        if (isInternetConnectionLayoutVisible) {
             return;
         }
         String imgUrl;
@@ -261,7 +254,7 @@ public class ProductsFragment extends Fragment {
              * mProgressDialog.setTitle("Download Image Tutorial"); // Set progressdialog message
              * mProgressDialog.setMessage("Loading..."); mProgressDialog.setIndeterminate(false);
              */
-            if(progressView != null)
+            if (progressView != null)
                 progressView.setVisibility(View.VISIBLE);
             // Show progressdialog
             // mProgressDialog.show();
@@ -287,7 +280,7 @@ public class ProductsFragment extends Fragment {
         @Override
         protected void onPostExecute(Bitmap result) {
 
-            if(isAdded() && getActivity() !=null) {
+            if (isAdded() && getActivity() != null) {
                 Drawable dr = new BitmapDrawable(getResources(), result);
                 rlRootLayout.setBackground(dr);
                 progressView.setVisibility(View.GONE);

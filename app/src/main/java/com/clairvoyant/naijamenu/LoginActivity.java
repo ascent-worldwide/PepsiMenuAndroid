@@ -25,6 +25,7 @@ import com.clairvoyant.naijamenu.utils.AppController;
 import com.clairvoyant.naijamenu.utils.Constants;
 import com.clairvoyant.naijamenu.utils.DownloadVideoTask;
 import com.clairvoyant.naijamenu.utils.HttpsTrustManager;
+import com.clairvoyant.naijamenu.utils.KeyboardUtil;
 import com.clairvoyant.naijamenu.utils.PreferencesUtils;
 import com.clairvoyant.naijamenu.utils.Utils;
 import com.google.gson.Gson;
@@ -36,6 +37,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private static String TAG = LoginActivity.class.getSimpleName();
 
     //	private static final String TAG = LoginActivity.class.getSimpleName();
     private RobotoLightEditText etUsername, etPassword;
@@ -103,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
             String password = etPassword.getText().toString().trim();
 
             if (Utils.isOnline(mContext)) {
+                KeyboardUtil.hideKeyboard(LoginActivity.this);
                 progressView.setVisibility(View.VISIBLE);
                 pushToServer(Constants.LOGIN_API, username, password);
             }
@@ -191,7 +195,7 @@ public class LoginActivity extends AppCompatActivity {
                             PreferencesUtils.putString(mContext, Constants.RESTAURANT_BACKGROUND_IMG_PORTRAIT, loginResponse.getRestaurant_menu_portrait_img());
 
                             PreferencesUtils.putString(mContext, Constants.PASSWORD, etPassword.getText().toString().trim());
-                            System.out.println("current password=" + etPassword.getText().toString().trim());
+                            Log.d(TAG, "current password=" + etPassword.getText().toString().trim());
                             PreferencesUtils.putBoolean(mContext, Constants.LOGGED, true);
                             int restaurantId = loginResponse.getRestaurant_id();
                             PreferencesUtils.putInt(mContext, Constants.RESTAURANT_ID, restaurantId);
@@ -216,7 +220,7 @@ public class LoginActivity extends AppCompatActivity {
                                 index++;
 
                                 String fileName = videoUrl.substring(index, videoUrl.length());
-                                System.out.println("newStr=" + fileName);
+                                Log.d(TAG, "newStr=" + fileName);
 
                                 new DownloadVideoTask(mContext, videoUrl, fileName, brandVideoUrlVersion).execute("");
                             }

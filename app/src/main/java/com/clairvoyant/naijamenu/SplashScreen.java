@@ -2,8 +2,10 @@ package com.clairvoyant.naijamenu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.clairvoyant.naijamenu.utils.Constants;
 import com.clairvoyant.naijamenu.utils.DownloadVideoService;
@@ -11,6 +13,8 @@ import com.clairvoyant.naijamenu.utils.PreferencesUtils;
 import com.clairvoyant.naijamenu.utils.Utils;
 
 public class SplashScreen extends AppCompatActivity {
+
+    private static String TAG = SplashScreen.class.getSimpleName();
     private Context mContext;
 
     @Override
@@ -35,7 +39,11 @@ public class SplashScreen extends AppCompatActivity {
 
         if (Utils.isOnline(this)) {
             if (loggineIn) {
-                startService(new Intent(this, DownloadVideoService.class));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    startForegroundService(new Intent(this, DownloadVideoService.class));
+                } else {
+                    startService(new Intent(this, DownloadVideoService.class));
+                }
             }
         }
     }
@@ -62,7 +70,7 @@ public class SplashScreen extends AppCompatActivity {
                      * times up. Here we moved to another main activity class
                      */
                     boolean loggedIn = PreferencesUtils.getBoolean(mContext, Constants.LOGGED);
-                    System.out.println("fileName88888888888888888888" + PreferencesUtils.getString(mContext, Constants.VIDEO_FILE_NAME));
+                    Log.d(TAG, "Video File Name" + PreferencesUtils.getString(mContext, Constants.VIDEO_FILE_NAME));
                     if (loggedIn) {
                         startActivity(new Intent(mContext, HomeActivity.class));
                         finish();
@@ -81,10 +89,6 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     public synchronized void stopThread(Thread runner) {
-        if (runner != null) {
-            Thread thread = runner;
-            runner = null;
-            thread.interrupt();
-        }
+        if (runner != null) runner.interrupt();
     }
 }

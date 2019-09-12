@@ -9,13 +9,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -50,11 +50,11 @@ public class SubCategoryFragment extends Fragment {
             categoryBean = (MenuCategoryBean) getArguments().getSerializable("CATEGORY_DATA");
             MenuCategoryBean[] categoryArray = categoryBean.getSubCategories();
             categoryList = new ArrayList<>();
-            for (int i = 0; i < categoryArray.length; i++) {
+            for (MenuCategoryBean menuCategoryBean : categoryArray) {
                 MenuCategoryBean bean = new MenuCategoryBean();
-                bean.setCategoryId(categoryArray[i].getCategoryId());
-                bean.setCategoryName(categoryArray[i].getCategoryName());
-                bean.setCategoryURL(categoryArray[i].getCategoryURL());
+                bean.setCategoryId(menuCategoryBean.getCategoryId());
+                bean.setCategoryName(menuCategoryBean.getCategoryName());
+                bean.setCategoryURL(menuCategoryBean.getCategoryURL());
                 categoryList.add(bean);
             }
         }
@@ -70,9 +70,9 @@ public class SubCategoryFragment extends Fragment {
     }
 
     private void initialiseViews(View menuView) {
-        progressView = (RelativeLayout) menuView.findViewById(R.id.progress_view_menu);
-        menuRecycler = (RecyclerView) menuView.findViewById(R.id.menu_recycler);
-        rlRootLayout = (RelativeLayout) menuView.findViewById(R.id.rlRootLayout);
+        progressView = menuView.findViewById(R.id.progress_view_menu);
+        menuRecycler = menuView.findViewById(R.id.menu_recycler);
+        rlRootLayout = menuView.findViewById(R.id.rlRootLayout);
         menuRecycler.setHasFixedSize(true);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
             columns = 4;
@@ -104,7 +104,7 @@ public class SubCategoryFragment extends Fragment {
         private ArrayList<MenuCategoryBean> menuList;
         private Activity mContext;
 
-        public MenuRecyclerAdapter(Activity mContext, ArrayList<MenuCategoryBean> menuList) {
+        private MenuRecyclerAdapter(Activity mContext, ArrayList<MenuCategoryBean> menuList) {
             this.mContext = mContext;
             this.menuList = menuList;
         }
@@ -120,21 +120,19 @@ public class SubCategoryFragment extends Fragment {
             final MenuCategoryBean mMenuBean = menuList.get(position);
             MenuViewHolder.menuName.setText(mMenuBean.getCategoryName());
             Utils.renderImage(mContext, mMenuBean.getCategoryURL(), MenuViewHolder.menuImage);
-            MenuViewHolder.menuImage.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, MenuFragmentActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("POSITION", position);
-                    bundle.putSerializable("PRODUCTS", menuList);
-                    bundle.putBoolean("subCategory", true);
-                    intent.putExtra("PRODUCT_BUNDLE", bundle);
-                    mContext.startActivity(intent);
-                    mContext.finish();
-                }
+            MenuViewHolder.menuImage.setOnClickListener(v -> {
+                Intent intent = new Intent(mContext, MenuFragmentActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("POSITION", position);
+                bundle.putSerializable("PRODUCTS", menuList);
+                bundle.putBoolean("subCategory", true);
+                intent.putExtra("PRODUCT_BUNDLE", bundle);
+                mContext.startActivity(intent);
+                mContext.finish();
             });
         }
 
+        @NonNull
         @Override
         public MenuViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
             View categoryView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_menu_item_view,
@@ -144,13 +142,13 @@ public class SubCategoryFragment extends Fragment {
 
         class MenuViewHolder extends RecyclerView.ViewHolder {
 
-            protected ImageView menuImage;
-            protected RobotoLightTextView menuName;
+            private ImageView menuImage;
+            private RobotoLightTextView menuName;
 
-            public MenuViewHolder(View view) {
+            private MenuViewHolder(View view) {
                 super(view);
-                menuImage = (ImageView) view.findViewById(R.id.iv_menu_image);
-                menuName = (RobotoLightTextView) view.findViewById(R.id.tv_menu_name);
+                menuImage = view.findViewById(R.id.iv_menu_image);
+                menuName = view.findViewById(R.id.tv_menu_name);
             }
         }
     }

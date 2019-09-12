@@ -3,6 +3,7 @@ package com.clairvoyant.naijamenu;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
@@ -66,32 +67,26 @@ public class PromotionActivity extends YouTubeBaseActivity implements YouTubePla
             if (!TextUtils.isEmpty(promoBannerData)) {
                 setContentView(R.layout.activity_promotion);
                 Utils.setOrientation(mContext);
-                promotionViewPager = (DynamicHeightViewPager) findViewById(R.id.promotion_viewpager);
-                progressView = (RelativeLayout) findViewById(R.id.progress_view_promotion);
-                skip = (RobotoRegularTextView) findViewById(R.id.skip);
-                dotBox = (LinearLayout) findViewById(R.id.dot_box);
+                promotionViewPager = findViewById(R.id.promotion_viewpager);
+                progressView = findViewById(R.id.progress_view_promotion);
+                skip = findViewById(R.id.skip);
+                dotBox = findViewById(R.id.dot_box);
 
                 PromotionResponseBean promotionResponse = new Gson().fromJson(promoBannerData, PromotionResponseBean.class);
                 parseJsonLogic(promotionResponse, promoBannerData, false);
             } else {
                 setContentView(R.layout.no_network_activity);
                 Utils.setOrientation(mContext);
-                RobotoRegularButton tryAgain = (RobotoRegularButton) findViewById(R.id.try_again);
-                tryAgain.setOnClickListener(new OnClickListener() {
-
-                    @Override
-                    public void onClick(View arg0) {
-                        reload();
-                    }
-                });
+                RobotoRegularButton tryAgain = findViewById(R.id.try_again);
+                tryAgain.setOnClickListener(arg0 -> reload());
             }
         } else {
             setContentView(R.layout.activity_promotion);
             Utils.setOrientation(mContext);
-            promotionViewPager = (DynamicHeightViewPager) findViewById(R.id.promotion_viewpager);
-            progressView = (RelativeLayout) findViewById(R.id.progress_view_promotion);
-            skip = (RobotoRegularTextView) findViewById(R.id.skip);
-            dotBox = (LinearLayout) findViewById(R.id.dot_box);
+            promotionViewPager = findViewById(R.id.promotion_viewpager);
+            progressView = findViewById(R.id.progress_view_promotion);
+            skip = findViewById(R.id.skip);
+            dotBox = findViewById(R.id.dot_box);
             if (getIntent() != null) {
                 menuId = getIntent().getIntExtra("MENU", 0);
             }
@@ -193,11 +188,11 @@ public class PromotionActivity extends YouTubeBaseActivity implements YouTubePla
             if (urls.length >= 1) {
                 dotBox.setVisibility(View.VISIBLE);
 
-                dotOne = (LinearLayout) findViewById(R.id.dot_one);
-                dotTwo = (LinearLayout) findViewById(R.id.dot_two);
-                dotThree = (LinearLayout) findViewById(R.id.dot_three);
-                dotFour = (LinearLayout) findViewById(R.id.dot_four);
-                dotFive = (LinearLayout) findViewById(R.id.dot_five);
+                dotOne = findViewById(R.id.dot_one);
+                dotTwo = findViewById(R.id.dot_two);
+                dotThree = findViewById(R.id.dot_three);
+                dotFour = findViewById(R.id.dot_four);
+                dotFive = findViewById(R.id.dot_five);
 
 
                 switch (urls.length) {
@@ -388,7 +383,7 @@ public class PromotionActivity extends YouTubeBaseActivity implements YouTubePla
         LayoutInflater mLayoutInflater;
         private String[] mResources;
 
-        public CustomPagerAdapter(Context context, String[] mResources) {
+        private CustomPagerAdapter(Context context, String[] mResources) {
             mContext = context;
             this.mResources = mResources;
             mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -400,21 +395,22 @@ public class PromotionActivity extends YouTubeBaseActivity implements YouTubePla
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == ((LinearLayout) object);
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+            return view == object;
         }
 
+        @NonNull
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
             View itemView = mLayoutInflater.inflate(R.layout.pager_item, container, false);
-            ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            ImageView imageView = itemView.findViewById(R.id.imageView);
             Utils.renderImage(mContext, mResources[position], imageView);
             container.addView(itemView);
             return itemView;
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(ViewGroup container, int position, @NonNull Object object) {
             container.removeView((LinearLayout) object);
         }
     }

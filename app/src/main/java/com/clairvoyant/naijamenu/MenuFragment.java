@@ -26,7 +26,6 @@ import com.android.volley.Request.Method;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.bumptech.glide.Glide;
 import com.clairvoyant.naijamenu.adapter.MenuRecyclerAdapter;
 import com.clairvoyant.naijamenu.bean.CommonRequestBean;
 import com.clairvoyant.naijamenu.bean.MenuCategoryBean;
@@ -43,6 +42,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MenuFragment extends Fragment {
+
+    private static String TAG = MenuFragment.class.getSimpleName();
+
 
     ProgressDialog mProgressDialog;
     private RecyclerView menuRecycler;
@@ -93,9 +95,9 @@ public class MenuFragment extends Fragment {
 
     private void inflatelayout(LayoutInflater inflater, ViewGroup container) {
         menuView = inflater.inflate(R.layout.menu_category_fragment, container, false);
-        progressView = (RelativeLayout) menuView.findViewById(R.id.progress_view_menu);
-        rlRootLayout = (RelativeLayout) menuView.findViewById(R.id.rlRootLayout);
-        menuRecycler = (RecyclerView) menuView.findViewById(R.id.menu_recycler);
+        progressView = menuView.findViewById(R.id.progress_view_menu);
+        rlRootLayout = menuView.findViewById(R.id.rlRootLayout);
+        menuRecycler = menuView.findViewById(R.id.menu_recycler);
         menuRecycler.setHasFixedSize(true);
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
@@ -167,7 +169,7 @@ public class MenuFragment extends Fragment {
             PreferencesUtils.putString(mContext, Constants.HOME_CATEGORIES, response);
 
             String savedData = PreferencesUtils.getString(mContext, Constants.HOME_CATEGORIES);
-            System.out.println("savedData=" + savedData);
+            Log.d(TAG, "savedData=" + savedData);
 
         }
 
@@ -265,8 +267,8 @@ public class MenuFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Bitmap result) {
-            if(isAdded()) {
-                if(result != null) {
+            if (isAdded()) {
+                if (result != null) {
                     Drawable dr = new BitmapDrawable(getResources(), result);
                     rlRootLayout.setBackground(dr);
                 } else {

@@ -1,9 +1,8 @@
 package com.clairvoyant.naijamenu;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -40,6 +39,7 @@ public class VideoViewFragment extends Fragment {
     {
         public void onFragmentInteraction(boolean isVideoFinished);
     }*/
+    @SuppressLint("HandlerLeak")
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             int pos = msg.what;
@@ -50,12 +50,9 @@ public class VideoViewFragment extends Fragment {
                 videoView.start();
 
                 Log.d("Before Video Finish", "i m in before video finish");
-                videoView.setOnCompletionListener(new OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
+                videoView.setOnCompletionListener(mp -> {
 //						finish();
-                        mInterface.onFragmentInteraction(true);
-                    }
+                    mInterface.onFragmentInteraction(true);
                 });
             }
         }
@@ -71,7 +68,7 @@ public class VideoViewFragment extends Fragment {
     private void initialiseViews(View rootView) {
         mContext = getActivity();
         Utils.setOrientation(mContext);
-        videoView = (VideoView) rootView.findViewById(R.id.videoView);
+        videoView = rootView.findViewById(R.id.videoView);
         MediaController mediaController = new MediaController(mContext);
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(null);

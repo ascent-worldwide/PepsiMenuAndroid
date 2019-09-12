@@ -40,7 +40,6 @@ import java.util.Map;
 public class HomeActivity extends AppCompatActivity implements OnClickListener {
 
     private Context mContext;
-    private ImageView ivRestaurantIcon;
     private RelativeLayout progressView;
     private boolean isPromoBannerAvailable = true;
 
@@ -52,11 +51,11 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
 
         Utils.setOrientation(mContext);
 
-        LinearLayout menuBox = (LinearLayout) findViewById(R.id.menu_box);
-        LinearLayout challengeBox = (LinearLayout) findViewById(R.id.challenge_box);
-        RelativeLayout recipeBox = (RelativeLayout) findViewById(R.id.recipe_box);
-        RelativeLayout restaurantBox = (RelativeLayout) findViewById(R.id.restaurant_box);
-        ivRestaurantIcon = (ImageView) findViewById(R.id.ivRestaurantIcon);
+        LinearLayout menuBox = findViewById(R.id.menu_box);
+        LinearLayout challengeBox = findViewById(R.id.challenge_box);
+        RelativeLayout recipeBox = findViewById(R.id.recipe_box);
+        RelativeLayout restaurantBox = findViewById(R.id.restaurant_box);
+        ImageView ivRestaurantIcon = findViewById(R.id.ivRestaurantIcon);
 
         menuBox.setOnClickListener(this);
         challengeBox.setOnClickListener(this);
@@ -65,11 +64,11 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
 
         String restaurantHomeImg = PreferencesUtils.getString(mContext, Constants.RESTAURANT_HOMESCREEN_IMG);
         if (!TextUtils.isEmpty(restaurantHomeImg)) {
-            Glide.with(mContext).load(PreferencesUtils.getString(mContext, Constants.RESTAURANT_LOGO)).asBitmap().centerCrop().placeholder(R.drawable.pepsi_logo).fitCenter().into(ivRestaurantIcon);
+            Glide.with(mContext).load(PreferencesUtils.getString(mContext, Constants.RESTAURANT_LOGO)).centerCrop().placeholder(R.drawable.pepsi_logo).fitCenter().into(ivRestaurantIcon);
         }
 
         if (Utils.isOnline(mContext)) {
-            progressView = (RelativeLayout) findViewById(R.id.progress_view_promotion);
+            progressView = findViewById(R.id.progress_view_promotion);
             getPromotionalBanners(Constants.PROMOTIONAL_BANNER_API);
         }
     }
@@ -265,7 +264,7 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
                         AppVersionResponseBean appVersionResponse = gson.fromJson(response, AppVersionResponseBean.class);
                         if (appVersionResponse.getStatus().equals("true")) {
                             String strCurrentVersion = Utils.getAppVersion(mContext);
-                            String strUpdatedVersion = appVersionResponse.getApp_version();
+                            String strUpdatedVersion = appVersionResponse.getApp_version().toString();
                             if (strCurrentVersion != null && strUpdatedVersion != null) {
                                 double currentVersion = Double.parseDouble(strCurrentVersion);
                                 double updatedVersion = Double.parseDouble(strUpdatedVersion);
@@ -301,10 +300,10 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.app_exit_dialog_view);
-        RobotoRegularTextView messageView = (RobotoRegularTextView) dialog.findViewById(R.id.message);
+        RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(resource);
-        RobotoRegularTextView cancel = (RobotoRegularTextView) dialog.findViewById(R.id.cancel);
-        RobotoRegularTextView ok = (RobotoRegularTextView) dialog.findViewById(R.id.ok);
+        RobotoRegularTextView cancel = dialog.findViewById(R.id.cancel);
+        RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
         cancel.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -332,11 +331,11 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.app_exit_dialog_view);
-        RobotoRegularTextView messageView = (RobotoRegularTextView) dialog.findViewById(R.id.message);
+        RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(R.string.updateAppPopupTxt);
-        RobotoRegularTextView cancel = (RobotoRegularTextView) dialog.findViewById(R.id.cancel);
-        RobotoRegularTextView ok = (RobotoRegularTextView) dialog.findViewById(R.id.ok);
-        ok.setText("Update");
+        RobotoRegularTextView cancel = dialog.findViewById(R.id.cancel);
+        RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
+        ok.setText(getString(R.string.update));
         cancel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

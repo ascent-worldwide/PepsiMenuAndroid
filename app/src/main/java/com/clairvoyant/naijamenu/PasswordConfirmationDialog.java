@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -69,47 +68,41 @@ public class PasswordConfirmationDialog {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.logout_alert_dialog_view);
-        progressBar = (ProgressBar) dialog.findViewById(R.id.progressBar);
-        RobotoRegularTextView messageView = (RobotoRegularTextView) dialog.findViewById(R.id.message);
+        progressBar = dialog.findViewById(R.id.progressBar);
+        RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(mContext.getResources().getString(R.string.please_confirm_password_to_continue));
-        RobotoRegularTextView cancel = (RobotoRegularTextView) dialog.findViewById(R.id.cancel);
-        RobotoRegularTextView ok = (RobotoRegularTextView) dialog.findViewById(R.id.ok);
-        final RobotoRegularEditText etPassword = (RobotoRegularEditText) dialog.findViewById(R.id.etPassword);
+        RobotoRegularTextView cancel = dialog.findViewById(R.id.cancel);
+        RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
+        final RobotoRegularEditText etPassword = dialog.findViewById(R.id.etPassword);
         // layout for dialog container
-        layoutDialogContainer = (RelativeLayout) dialog.findViewById(R.id.layoutDialogContainer);
+        layoutDialogContainer = dialog.findViewById(R.id.layoutDialogContainer);
 
-        cancel.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideSoftKeyboard();
-                mPasswordConfirmListener.onDialogCancel();
-                dialog.dismiss();
-            }
+        cancel.setOnClickListener(v -> {
+            hideSoftKeyboard();
+            mPasswordConfirmListener.onDialogCancel();
+            dialog.dismiss();
         });
 
-        ok.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideSoftKeyboard(dialog);
-                String password = etPassword.getText().toString().trim();
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(mContext, mContext.getResources().getString(R.string.please_enter_password), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                layoutDialogContainer.setAlpha(.6f);
-                progressBar.setVisibility(View.VISIBLE);
-
-                /**
-                 *
-                 * perform the password checking task
-                 *
-                 */
-
-                int restaurantId = PreferencesUtils.getInt(mContext, Constants.RESTAURANT_ID);
-                pushToServer(Constants.PASSWORD_CONFIRMATION_API, restaurantId, password);
-
+        ok.setOnClickListener(v -> {
+            hideSoftKeyboard(dialog);
+            String password = etPassword.getText().toString().trim();
+            if (TextUtils.isEmpty(password)) {
+                Toast.makeText(mContext, mContext.getResources().getString(R.string.please_enter_password), Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            layoutDialogContainer.setAlpha(.6f);
+            progressBar.setVisibility(View.VISIBLE);
+
+            /**
+             *
+             * perform the password checking task
+             *
+             */
+
+            int restaurantId = PreferencesUtils.getInt(mContext, Constants.RESTAURANT_ID);
+            pushToServer(Constants.PASSWORD_CONFIRMATION_API, restaurantId, password);
+
         });
         dialog.show();
         hideSoftKeyboard(dialog);

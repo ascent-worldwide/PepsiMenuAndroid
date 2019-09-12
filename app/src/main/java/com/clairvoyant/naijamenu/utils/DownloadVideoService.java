@@ -1,7 +1,13 @@
 package com.clairvoyant.naijamenu.utils;
 
 import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -20,12 +26,37 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DownloadVideoService extends IntentService {
+
+    private static String TAG = DownloadVideoService.class.getSimpleName();
+
     public DownloadVideoService() {
         super("DownloadVideoService");
     }
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(Constants.DOWNLOAD_CHANNEL_ID,
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+
+            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
+
+            Notification notification = new NotificationCompat.Builder(this, Constants.DOWNLOAD_CHANNEL_ID)
+                    .setContentTitle("Downloading Video")
+                    .setSmallIcon(R.drawable.ic_launcher)
+                    .build();
+
+            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
+            startForeground(Constants.DOWNLOAD_NOTIFICATION_ID, notification);
+        }
+    }
+
+    @Override
     protected void onHandleIntent(Intent intent) {
+
+
         callApi(Constants.GET_BRAND_PROMOTION);
     }
 
@@ -48,7 +79,7 @@ public class DownloadVideoService extends IntentService {
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> param = new HashMap<>();
                         param.put("data", params);
-                        Log.i("GET BRAND PROMOTION Request", param.toString());
+                        Log.i(TAG, param.toString());
                         return param;
                     }
                 };
@@ -90,7 +121,7 @@ public class DownloadVideoService extends IntentService {
                             }
                         } else {
                             //false response from server
-                            System.out.println("false response from server when consuming GetBrandPromotion API");
+                            Log.d(TAG, "false response from server when consuming GetBrandPromotion API");
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -105,7 +136,7 @@ public class DownloadVideoService extends IntentService {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(R.string.network_failure);
+                Log.d(TAG, String.valueOf(R.string.network_failure));
             }
         };
     }

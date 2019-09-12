@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -53,6 +52,8 @@ import java.util.Map;
 
 public class RateRecipeFragment extends Fragment implements OnClickListener {
 
+    private static String TAG = RateRecipeFragment.class.getSimpleName();
+
     private View recipeView;
     private Spinner categorySpinner, subCategorySpinner, productSpinner;
     private RatingBar rating;
@@ -75,18 +76,18 @@ public class RateRecipeFragment extends Fragment implements OnClickListener {
 
     private void initializeViews(View view) {
 
-        categorySpinner = (Spinner) view.findViewById(R.id.category_spinner);
-        subCategorySpinner = (Spinner) view.findViewById(R.id.subcategory_spinner);
-        productSpinner = (Spinner) view.findViewById(R.id.product_spinner);
-        rating = (RatingBar) view.findViewById(R.id.rating);
-        review = (RobotoRegularEditText) view.findViewById(R.id.review);
-        name = (RobotoRegularEditText) view.findViewById(R.id.rate_name);
-        mobileNumber = (RobotoRegularEditText) view.findViewById(R.id.rate_mobile);
-        email = (RobotoRegularEditText) view.findViewById(R.id.rate_email);
-        birthday = (RobotoRegularTextView) view.findViewById(R.id.birthday);
-        anniversary = (RobotoRegularTextView) view.findViewById(R.id.anniversary);
-        btnSubmit = (RobotoRegularButton) view.findViewById(R.id.btn_submit);
-        progressView = (RelativeLayout) view.findViewById(R.id.progress_view_recipe);
+        categorySpinner = view.findViewById(R.id.category_spinner);
+        subCategorySpinner = view.findViewById(R.id.subcategory_spinner);
+        productSpinner = view.findViewById(R.id.product_spinner);
+        rating = view.findViewById(R.id.rating);
+        review = view.findViewById(R.id.review);
+        name = view.findViewById(R.id.rate_name);
+        mobileNumber = view.findViewById(R.id.rate_mobile);
+        email = view.findViewById(R.id.rate_email);
+        birthday = view.findViewById(R.id.birthday);
+        anniversary = view.findViewById(R.id.anniversary);
+        btnSubmit = view.findViewById(R.id.btn_submit);
+        progressView = view.findViewById(R.id.progress_view_recipe);
         btnSubmit.setOnClickListener(this);
         birthday.setOnClickListener(this);
         anniversary.setOnClickListener(this);
@@ -108,7 +109,7 @@ public class RateRecipeFragment extends Fragment implements OnClickListener {
                 if (productList != null && productList.size() > 0) {
                     ProductBean productData = productList.get(position);
                     productId = productData.getProductId();
-                    System.out.println("productId=" + productId);
+                    Log.d(TAG, "productId=" + productId);
                 }
             }
 
@@ -408,18 +409,18 @@ public class RateRecipeFragment extends Fragment implements OnClickListener {
                             ProductBean[] productArray = productBeanOuter.getProductlist();
                             productList = new ArrayList<>();
 
-                            for (int i = 0; i < productArray.length; i++) {
+                            for (ProductBean bean : productArray) {
                                 ProductBean productBean = new ProductBean();
-                                productBean.setProductId(productArray[i].getProductId());
-                                productBean.setProductName(productArray[i].getProductName());
-                                productBean.setProductDesc(productArray[i].getProductDesc());
-                                productBean.setPrice(productArray[i].getPrice());
-                                productBean.setProductType(productArray[i].getProductType());
-                                productBean.setSpiceLevel(productArray[i].getSpiceLevel());
-                                productBean.setPreparationTime(productArray[i].getPreparationTime());
-                                productBean.setDetail_url_type(productArray[i].getDetail_url_type());
-                                productBean.setProductUrl(productArray[i].getProductUrl());
-                                productBean.setProductDetailUrl(productArray[i].getProductDetailUrl());
+                                productBean.setProductId(bean.getProductId());
+                                productBean.setProductName(bean.getProductName());
+                                productBean.setProductDesc(bean.getProductDesc());
+                                productBean.setPrice(bean.getPrice());
+                                productBean.setProductType(bean.getProductType());
+                                productBean.setSpiceLevel(bean.getSpiceLevel());
+                                productBean.setPreparationTime(bean.getPreparationTime());
+                                productBean.setDetail_url_type(bean.getDetail_url_type());
+                                productBean.setProductUrl(bean.getProductUrl());
+                                productBean.setProductDetailUrl(bean.getProductDetailUrl());
                                 productList.add(productBean);
                             }
                             String[] products = new String[productList.size() + 1];
@@ -622,15 +623,10 @@ public class RateRecipeFragment extends Fragment implements OnClickListener {
                 int mDay = c.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dpd = new DatePickerDialog(mContext,
-                        new DatePickerDialog.OnDateSetListener() {
-
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-                                String selectedDate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-                                String dob = Utils.ConvertDateFormat(selectedDate, "dd MMM, yyyy", "dd-MM-yyyy");
-                                birthday.setText(dob);
-                            }
+                        (view, year, monthOfYear, dayOfMonth) -> {
+                            String selectedDate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                            String dob = Utils.ConvertDateFormat(selectedDate, "dd MMM, yyyy", "dd-MM-yyyy");
+                            birthday.setText(dob);
                         }, mYear, mMonth, mDay);
                 dpd.show();
                 dpd.getDatePicker().setMaxDate(new Date().getTime());
@@ -643,18 +639,13 @@ public class RateRecipeFragment extends Fragment implements OnClickListener {
                 int mDay1 = c1.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dpd1 = new DatePickerDialog(mContext,
-                        new DatePickerDialog.OnDateSetListener() {
-
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-                                String selectedDate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-                                String aniversary = Utils.ConvertDateFormat(selectedDate, "dd MMM, yyyy", "dd-MM-yyyy");
-                                anniversary.setText(aniversary);
+                        (view, year, monthOfYear, dayOfMonth) -> {
+                            String selectedDate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                            String aniversary = Utils.ConvertDateFormat(selectedDate, "dd MMM, yyyy", "dd-MM-yyyy");
+                            anniversary.setText(aniversary);
 //					anniversary.setText(year + "-"
 //							+ (monthOfYear + 1) + "-" + dayOfMonth);
 
-                            }
                         }, mYear1, mMonth1, mDay1);
                 dpd1.show();
                 dpd1.getDatePicker().setMaxDate(new Date().getTime());

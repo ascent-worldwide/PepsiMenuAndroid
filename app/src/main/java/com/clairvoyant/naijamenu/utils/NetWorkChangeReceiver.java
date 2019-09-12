@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NetWorkChangeReceiver extends BroadcastReceiver {
+
+    private static String TAG = NetWorkChangeReceiver.class.getSimpleName();
     private String id = null;
     private Context mContext;
 
@@ -64,12 +66,12 @@ public class NetWorkChangeReceiver extends BroadcastReceiver {
             for (RateRestaurantBean rateRestaurantBean : rateRestaurantRequestJSONList) {
                 id = rateRestaurantBean.getId();
                 String requestData = rateRestaurantBean.getRateRestaurantJSONRequest();
-                System.out.println("id=" + id);
-                System.out.println("data=" + requestData);
+                Log.d(TAG, "id=" + id);
+                Log.d(TAG, "data=" + requestData);
                 updateRestaurantRatingToServer(requestData);
             }
         } else {
-            System.out.println("no data to sync in rate Restaurant feedback");
+            Log.d(TAG, "no data to sync in rate Restaurant feedback");
         }
     }
 
@@ -97,12 +99,12 @@ public class NetWorkChangeReceiver extends BroadcastReceiver {
             for (RateRecipeBean rateRecipeBean : rateRecipeRequestJSONList) {
                 id = rateRecipeBean.getId();
                 String requestData = rateRecipeBean.getRateRecipeJSONRequest();
-                System.out.println("id=" + id);
-                System.out.println("data=" + rateRecipeBean.getRateRecipeJSONRequest());
+                Log.d(TAG, "id=" + id);
+                Log.d(TAG, "data=" + rateRecipeBean.getRateRecipeJSONRequest());
                 updateRatingToServer(requestData);
             }
         } else {
-            System.out.println("no data to sync in recipe feedback");
+            Log.d(TAG, "no data to sync in recipe feedback");
         }
 
         syncRateRestaurantData();
@@ -115,7 +117,7 @@ public class NetWorkChangeReceiver extends BroadcastReceiver {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param = new HashMap<>();
                 param.put("data", requestData);
-                Log.i("RECIPE_PARAM IN BROADCAST RECEIVER", param.toString());
+                Log.i(TAG, param.toString());
                 return param;
             }
         };
@@ -138,11 +140,11 @@ public class NetWorkChangeReceiver extends BroadcastReceiver {
                         JSONObject obj = new JSONObject(response);
                         String status = obj.getString("status");
                         if (status != null && status.equals("true")) {
-                            System.out.println("id on success=" + id);
+                            Log.d(TAG, "id on success=" + id);
                             DatabaseHelper.deleteRateRecipeRequestJSOnDateById(mContext, id);
                         } else {
                             //Toast.makeText(mContext, obj.getString("message"), Toast.LENGTH_SHORT).show();
-                            System.out.println("false response from server while submitting recipe rating=" + obj.getString("message"));
+                            Log.d(TAG, "false response from server while submitting recipe rating=" + obj.getString("message"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -157,7 +159,7 @@ public class NetWorkChangeReceiver extends BroadcastReceiver {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("volley error while submitting recipe rating=" + error);
+                Log.d(TAG, "volley error while submitting recipe rating=" + error);
             }
 
         };
@@ -175,10 +177,10 @@ public class NetWorkChangeReceiver extends BroadcastReceiver {
                         JSONObject obj = new JSONObject(response);
                         String status = obj.getString("status");
                         if (status != null && status.equals("true")) {
-                            System.out.println("id on success=" + id);
+                            Log.d(TAG, "id on success=" + id);
                             DatabaseHelper.deleteRateRestaurantRequestJSOnDateById(mContext, id);
                         } else {
-                            System.out.println("false response from server while submitting reataurant rating=" + obj.getString("error"));
+                            Log.d(TAG, "false response from server while submitting reataurant rating=" + obj.getString("error"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -193,7 +195,7 @@ public class NetWorkChangeReceiver extends BroadcastReceiver {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("volley error in submitting restaurant rating=" + error);
+                Log.d(TAG, "volley error in submitting restaurant rating=" + error);
             }
 
         };

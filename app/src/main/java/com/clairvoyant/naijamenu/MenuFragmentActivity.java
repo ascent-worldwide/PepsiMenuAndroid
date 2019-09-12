@@ -18,6 +18,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -46,9 +47,12 @@ import com.clairvoyant.naijamenu.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Vector;
 
 public class MenuFragmentActivity extends AppCompatActivity implements OnClickListener, IPasswordConfirmListener {
+
+    private static String TAG = MenuFragmentActivity.class.getSimpleName();
 
     private static int currentListPosition = 1;
     protected SlidingDrawerAdapter mAdapter;
@@ -85,7 +89,7 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
         toolbar = (Toolbar) findViewById(R.id.menu_toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
             try {
                 toolbar.setBackgroundColor(
                         Color.parseColor(PreferencesUtils.getString(mContext, Constants.RESTAURANT_THEME, "#f25a43")));
@@ -94,10 +98,10 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
             }
             // toolbar.setLogo(R.drawable.header_logo);
             ImageView logo = (ImageView) toolbar.findViewById(R.id.logo);
-            Glide.with(mContext).load(PreferencesUtils.getString(mContext, Constants.RESTAURANT_LOGO)).asBitmap().centerCrop().placeholder(R.drawable.pepsi_logo).fitCenter().into(logo);
+            Glide.with(mContext).load(PreferencesUtils.getString(mContext, Constants.RESTAURANT_LOGO)).centerCrop().placeholder(R.drawable.pepsi_logo).fitCenter().into(logo);
 
 
-            RobotoRegularTextView title = (RobotoRegularTextView) toolbar.findViewById(R.id.title);
+            RobotoRegularTextView title = toolbar.findViewById(R.id.title);
             // title.setText(R.string.app_name);
             // title.setText(PreferencesUtils.getString(mContext,
             // Constants.RESTAURANT_NAME));
@@ -230,7 +234,7 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
                  * tabs.setTextColor(Color.WHITE); } }
                  */
 
-                System.out.println("hi");
+                Log.d(TAG, "hi");
             }
 
             @Override
@@ -322,42 +326,34 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.logout_alert_dialog_view);
-        RobotoRegularTextView messageView = (RobotoRegularTextView) dialog.findViewById(R.id.message);
+        RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(resource);
-        RobotoRegularTextView cancel = (RobotoRegularTextView) dialog.findViewById(R.id.cancel);
-        RobotoRegularTextView ok = (RobotoRegularTextView) dialog.findViewById(R.id.ok);
-        final RobotoRegularEditText etPassword = (RobotoRegularEditText) dialog.findViewById(R.id.etPassword);
-        cancel.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                hideSoftKeyboard();
-                dialog.dismiss();
-            }
+        RobotoRegularTextView cancel = dialog.findViewById(R.id.cancel);
+        RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
+        final RobotoRegularEditText etPassword = dialog.findViewById(R.id.etPassword);
+        cancel.setOnClickListener(v -> {
+            hideSoftKeyboard();
+            dialog.dismiss();
         });
 
-        ok.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                String password = etPassword.getText().toString().trim();
-                String userPassword = PreferencesUtils.getString(mContext, Constants.PASSWORD, "");
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(mContext, getString(R.string.please_enter_password), Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (!userPassword.equals(password)) {
-                    Toast.makeText(mContext, getString(R.string.please_enter_correct_password), Toast.LENGTH_SHORT)
-                            .show();
-                    return;
-                }
-
-                Utils.logout(mContext);
-                hideSoftKeyboard(dialog);
-                Intent intent = new Intent(mContext, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                MenuFragmentActivity.this.finish();
+        ok.setOnClickListener(v -> {
+            String password = etPassword.getText().toString().trim();
+            String userPassword = PreferencesUtils.getString(mContext, Constants.PASSWORD, "");
+            if (TextUtils.isEmpty(password)) {
+                Toast.makeText(mContext, getString(R.string.please_enter_password), Toast.LENGTH_SHORT).show();
+                return;
+            } else if (!userPassword.equals(password)) {
+                Toast.makeText(mContext, getString(R.string.please_enter_correct_password), Toast.LENGTH_SHORT)
+                        .show();
+                return;
             }
+
+            Utils.logout(mContext);
+            hideSoftKeyboard(dialog);
+            Intent intent = new Intent(mContext, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            MenuFragmentActivity.this.finish();
         });
         dialog.show();
         hideSoftKeyboard(dialog);

@@ -22,7 +22,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.RatingBar;
-import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -61,6 +60,8 @@ import java.util.Map;
 
 public class RateRecipeFragment1 extends Fragment implements OnClickListener {
 
+    private static String TAG = RateRecipeFragment1.class.getSimpleName();
+
     MenuCategoryBean[] subCategoriesArr;
     private View recipeView;
     private boolean isDialogShown = false;
@@ -86,31 +87,27 @@ public class RateRecipeFragment1 extends Fragment implements OnClickListener {
     }
 
     private void initializeViews(View view, LayoutInflater inflater, ViewGroup container) {
-        categorySpinner = (Spinner) view.findViewById(R.id.category_spinner);
-        subCategorySpinner = (Spinner) view.findViewById(R.id.subcategory_spinner);
-        productSpinner = (Spinner) view.findViewById(R.id.product_spinner);
-        rating = (RatingBar) view.findViewById(R.id.rating);
-        review = (RobotoRegularEditText) view.findViewById(R.id.review);
-        name = (RobotoRegularEditText) view.findViewById(R.id.rate_name);
-        mobileNumber = (RobotoRegularEditText) view.findViewById(R.id.rate_mobile);
-        email = (RobotoRegularEditText) view.findViewById(R.id.rate_email);
-        birthday = (RobotoRegularTextView) view.findViewById(R.id.birthday);
-        anniversary = (RobotoRegularTextView) view.findViewById(R.id.anniversary);
-        btnSubmit = (RobotoRegularButton) view.findViewById(R.id.btn_submit);
-        progressView = (RelativeLayout) view.findViewById(R.id.progress_view_recipe);
+        categorySpinner = view.findViewById(R.id.category_spinner);
+        subCategorySpinner = view.findViewById(R.id.subcategory_spinner);
+        productSpinner = view.findViewById(R.id.product_spinner);
+        rating = view.findViewById(R.id.rating);
+        review = view.findViewById(R.id.review);
+        name = view.findViewById(R.id.rate_name);
+        mobileNumber = view.findViewById(R.id.rate_mobile);
+        email = view.findViewById(R.id.rate_email);
+        birthday = view.findViewById(R.id.birthday);
+        anniversary = view.findViewById(R.id.anniversary);
+        btnSubmit = view.findViewById(R.id.btn_submit);
+        progressView = view.findViewById(R.id.progress_view_recipe);
         btnSubmit.setOnClickListener(this);
         birthday.setOnClickListener(this);
         anniversary.setOnClickListener(this);
 
         Drawable drawable = rating.getProgressDrawable();
         drawable.setColorFilter(Color.parseColor("#ffbf00"), Mode.SRC_ATOP);
-        rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
-
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                Drawable drawable = ratingBar.getProgressDrawable();
-                drawable.setColorFilter(Color.parseColor("#ffbf00"), Mode.SRC_ATOP);
-            }
+        rating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            Drawable drawable1 = ratingBar.getProgressDrawable();
+            drawable1.setColorFilter(Color.parseColor("#ffbf00"), Mode.SRC_ATOP);
         });
 
         String recipeCategories = DatabaseHelper.getRecipeCategories(mContext);
@@ -125,14 +122,8 @@ public class RateRecipeFragment1 extends Fragment implements OnClickListener {
 //			Toast.makeText(mContext, R.string.network_failure, Toast.LENGTH_SHORT).show();
 
             recipeView = inflater.inflate(R.layout.no_network_activity, container, false);
-            RobotoRegularButton tryAgain = (RobotoRegularButton) recipeView.findViewById(R.id.try_again);
-            tryAgain.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View arg0) {
-                    reload();
-                }
-            });
+            RobotoRegularButton tryAgain = recipeView.findViewById(R.id.try_again);
+            tryAgain.setOnClickListener(arg0 -> reload());
 
         }
 
@@ -148,7 +139,7 @@ public class RateRecipeFragment1 extends Fragment implements OnClickListener {
                     if (productList != null && productList.size() > 0) {
                         ProductBean productData = productList.get(position);
                         productId = productData.getProductId();
-                        System.out.println("productId=" + productId);
+                        Log.d(TAG, "productId=" + productId);
                     }
                 }
             }
@@ -168,9 +159,8 @@ public class RateRecipeFragment1 extends Fragment implements OnClickListener {
                     if (position != 0)
                         position--;
 
-                    int categoryId = subCategoriesArr[position].getCategoryId();
-                    catId = categoryId;
-                    System.out.println("categoryId=" + catId);
+                    catId = subCategoriesArr[position].getCategoryId();
+                    Log.d(TAG, "categoryId=" + catId);
                     String strCategoryId = String.valueOf(catId);
                     String recipeProductByCategoryId = DatabaseHelper.getRecipeProductByCategoryId(mContext, strCategoryId);
 
@@ -297,7 +287,7 @@ public class RateRecipeFragment1 extends Fragment implements OnClickListener {
 				} else{*/
 
                 catId = menuCategoryList.get(position).getCategoryId();
-                System.out.println("categoryId=" + catId);
+                Log.d(TAG, "categoryId=" + catId);
                 String recipeProductByCategoryId = DatabaseHelper.getRecipeProductByCategoryId(mContext, String.valueOf(menuCategoryList.get(position).getCategoryId()));
 
                 if (categorySpinner.getSelectedItemPosition() != 0) {
@@ -425,18 +415,18 @@ public class RateRecipeFragment1 extends Fragment implements OnClickListener {
         ProductBean[] productArray = productBeanOuter.getProductlist();
         productList = new ArrayList<>();
 
-        for (int i = 0; i < productArray.length; i++) {
+        for (ProductBean bean : productArray) {
             ProductBean productBean = new ProductBean();
-            productBean.setProductId(productArray[i].getProductId());
-            productBean.setProductName(productArray[i].getProductName());
-            productBean.setProductDesc(productArray[i].getProductDesc());
-            productBean.setPrice(productArray[i].getPrice());
-            productBean.setProductType(productArray[i].getProductType());
-            productBean.setSpiceLevel(productArray[i].getSpiceLevel());
-            productBean.setPreparationTime(productArray[i].getPreparationTime());
-            productBean.setDetail_url_type(productArray[i].getDetail_url_type());
-            productBean.setProductUrl(productArray[i].getProductUrl());
-            productBean.setProductDetailUrl(productArray[i].getProductDetailUrl());
+            productBean.setProductId(bean.getProductId());
+            productBean.setProductName(bean.getProductName());
+            productBean.setProductDesc(bean.getProductDesc());
+            productBean.setPrice(bean.getPrice());
+            productBean.setProductType(bean.getProductType());
+            productBean.setSpiceLevel(bean.getSpiceLevel());
+            productBean.setPreparationTime(bean.getPreparationTime());
+            productBean.setDetail_url_type(bean.getDetail_url_type());
+            productBean.setProductUrl(bean.getProductUrl());
+            productBean.setProductDetailUrl(bean.getProductDetailUrl());
             productList.add(productBean);
         }
         String[] products = new String[productList.size() + 1];
@@ -590,8 +580,8 @@ public class RateRecipeFragment1 extends Fragment implements OnClickListener {
     private void handleNoInternetCondition(final Dialog dialog) {
         if (dialog != null) {
             dialog.show();
-            RobotoRegularTextView tvTryAgain = (RobotoRegularTextView) dialog.findViewById(R.id.tvTryAgain);
-            RobotoRegularTextView ok = (RobotoRegularTextView) dialog.findViewById(R.id.ok);
+            RobotoRegularTextView tvTryAgain = dialog.findViewById(R.id.tvTryAgain);
+            RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
             tvTryAgain.setOnClickListener(new OnClickListener() {
 
                 @Override
@@ -617,10 +607,10 @@ public class RateRecipeFragment1 extends Fragment implements OnClickListener {
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 		dialog.setContentView(R.layout.no_internet_dialog);
-		RobotoRegularTextView messageView = (RobotoRegularTextView) dialog.findViewById(R.id.message);
+		RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
 		messageView.setText(resource);
-		RobotoRegularTextView tvTryAgain = (RobotoRegularTextView) dialog.findViewById(R.id.tvTryAgain);
-		RobotoRegularTextView ok = (RobotoRegularTextView) dialog.findViewById(R.id.ok);
+		RobotoRegularTextView tvTryAgain = dialog.findViewById(R.id.tvTryAgain);
+		RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
 		tvTryAgain.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -782,26 +772,16 @@ public class RateRecipeFragment1 extends Fragment implements OnClickListener {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.birthday_or_aniversary_alert_dialog_view);
-        RobotoRegularTextView messageView = (RobotoRegularTextView) dialog.findViewById(R.id.message);
+        RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(messsage);
-        RobotoRegularTextView noThanks = (RobotoRegularTextView) dialog.findViewById(R.id.tvNoThanks);
-        RobotoRegularTextView ok = (RobotoRegularTextView) dialog.findViewById(R.id.ok);
-        noThanks.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                isDialogShown = true;
-            }
+        RobotoRegularTextView noThanks = dialog.findViewById(R.id.tvNoThanks);
+        RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
+        noThanks.setOnClickListener(v -> {
+            dialog.dismiss();
+            isDialogShown = true;
         });
 
-        ok.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        ok.setOnClickListener(v -> dialog.dismiss());
         dialog.show();
     }
 }

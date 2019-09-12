@@ -64,10 +64,10 @@
                         android:layout_margin="@dimen/ten_dp"
                         android:layout_toRightOf="@+id/score_icon"
                         android:background="@drawable/blue_background_rounded"
-                        android:paddingBottom="@dimen/twelve_dp"
                         android:paddingLeft="@dimen/twenty_dp"
-                        android:paddingRight="@dimen/twenty_dp"
                         android:paddingTop="@dimen/twelve_dp"
+                        android:paddingRight="@dimen/twenty_dp"
+                        android:paddingBottom="@dimen/twelve_dp"
                         android:text="0"
                         android:textColor="@color/white"
                         android:textSize="@dimen/twenty_sp" />
@@ -92,10 +92,10 @@
                         android:layout_margin="@dimen/ten_dp"
                         android:layout_toRightOf="@+id/time_icon"
                         android:background="@drawable/blue_background_rounded"
-                        android:paddingBottom="@dimen/twelve_dp"
                         android:paddingLeft="@dimen/twenty_dp"
-                        android:paddingRight="@dimen/twenty_dp"
                         android:paddingTop="@dimen/twelve_dp"
+                        android:paddingRight="@dimen/twenty_dp"
+                        android:paddingBottom="@dimen/twelve_dp"
                         android:text="00:35"
                         android:textColor="@color/white"
                         android:textSize="@dimen/twenty_sp" />
@@ -161,10 +161,10 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/twenty_dp"
                             android:paddingLeft="@dimen/ten_dp"
+                            android:paddingTop="@dimen/twenty_dp"
                             android:paddingRight="@dimen/ten_dp"
-                            android:paddingTop="@dimen/twenty_dp">
+                            android:paddingBottom="@dimen/twenty_dp">
 
                             <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
                                 android:id="@+id/q"

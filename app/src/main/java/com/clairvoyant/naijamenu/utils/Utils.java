@@ -14,7 +14,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Window;
 import android.widget.ImageView;
@@ -25,6 +24,7 @@ import com.clairvoyant.naijamenu.LoginActivity;
 import com.clairvoyant.naijamenu.R;
 import com.clairvoyant.naijamenu.fonts.RobotoRegularTextView;
 import com.clairvoyant.naijamenu.utils.BasicImageDownloader.OnImageReadListener;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -66,17 +66,17 @@ public class Utils {
         String appVersion = null;
         try {
             PackageInfo packageInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
-            appVersion = packageInfo.versionName;
+            appVersion = String.valueOf(packageInfo.versionCode);
         } catch (NameNotFoundException e) {
             e.printStackTrace();
         }
         return appVersion;
     }
 
-    public static String getIMEI(Context context) {
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        return telephonyManager.getDeviceId();
-    }
+//    public static String getIMEI(Context context) {
+//        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+//        return telephonyManager.getDeviceId();
+//    }
 
     public static String getMake() {
         return android.os.Build.MANUFACTURER;
@@ -357,6 +357,6 @@ public class Utils {
                 Log.d("image load", "fail");
             }
         });*/
-         Glide.with(pContext).load(pImgUrl).asBitmap().fitCenter().placeholder(R.drawable.product_placeholder).fitCenter().into(pImageView);
+        Glide.with(pContext).load(pImgUrl).fitCenter().placeholder(R.drawable.product_placeholder).fitCenter().into(pImageView);
     }
 }

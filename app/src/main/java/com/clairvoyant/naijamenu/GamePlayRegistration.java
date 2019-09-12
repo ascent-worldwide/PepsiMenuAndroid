@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -45,24 +44,18 @@ public class GamePlayRegistration extends AppCompatActivity {
         setContentView(R.layout.activity_game_registration);
         mContext = this;
         Utils.setOrientation(mContext);
-        name = (RobotoRegularEditText) findViewById(R.id.et_name);
-        email = (RobotoRegularEditText) findViewById(R.id.et_email);
-        phoneNumber = (RobotoRegularEditText) findViewById(R.id.et_phone_number);
-        btnSubmit = (RobotoRegularButton) findViewById(R.id.btn_submit);
-        progressView = (RelativeLayout) findViewById(R.id.progress_view_quiz_winner);
+        name = findViewById(R.id.et_name);
+        email = findViewById(R.id.et_email);
+        phoneNumber = findViewById(R.id.et_phone_number);
+        btnSubmit = findViewById(R.id.btn_submit);
+        progressView = findViewById(R.id.progress_view_quiz_winner);
         Intent intent = getIntent();
         if (intent != null) {
             contest_id = intent.getIntExtra("CONTEST_ID", 0);
             prizeId = intent.getIntExtra("PRIZE_ID", 0);
         }
 
-        btnSubmit.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                validateFields();
-            }
-        });
+        btnSubmit.setOnClickListener(v -> validateFields());
     }
 
     private void validateFields() {

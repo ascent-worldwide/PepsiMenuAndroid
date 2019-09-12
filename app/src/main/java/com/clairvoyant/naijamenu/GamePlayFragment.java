@@ -25,7 +25,6 @@ import com.android.volley.Request.Method;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.clairvoyant.naijamenu.MainActivity.QuizkBackPressedListener;
 import com.clairvoyant.naijamenu.bean.CommonRequestBean;
 import com.clairvoyant.naijamenu.bean.PrizeList;
 import com.clairvoyant.naijamenu.bean.QuizLevels;
@@ -98,7 +97,7 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
                 Toast.makeText(mContext, R.string.network_failure, Toast.LENGTH_SHORT).show();
             }
 
-            ImageView logo = (ImageView) gameView.findViewById(R.id.pepsi_logo);
+            ImageView logo = gameView.findViewById(R.id.pepsi_logo);
             logo.setOnClickListener(new OnClickListener() {
 
                 @Override
@@ -118,51 +117,40 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
 
     private void initializeViews(View gameView) {
 
-        progressView = (RelativeLayout) gameView.findViewById(R.id.progress_view_quiz);
-        rlChildLayout = (RelativeLayout) gameView.findViewById(R.id.rlChildLayout);
+        progressView = gameView.findViewById(R.id.progress_view_quiz);
+        rlChildLayout = gameView.findViewById(R.id.rlChildLayout);
 
-        scoretv = (RobotoRegularTextView) gameView.findViewById(R.id.score);
-        time = (RobotoRegularTextView) gameView.findViewById(R.id.time);
-        levelNumber = (RobotoRegularTextView) gameView.findViewById(R.id.level_numbner);
-        logout = (ImageView) gameView.findViewById(R.id.logout);
+        scoretv = gameView.findViewById(R.id.score);
+        time = gameView.findViewById(R.id.time);
+        levelNumber = gameView.findViewById(R.id.level_numbner);
+        logout = gameView.findViewById(R.id.logout);
 
-        question = (RobotoRegularTextView) gameView.findViewById(R.id.question);
-        answerOne = (RobotoRegularTextView) gameView.findViewById(R.id.answer_one);
-        answerTwo = (RobotoRegularTextView) gameView.findViewById(R.id.answer_two);
-        answerThree = (RobotoRegularTextView) gameView.findViewById(R.id.answer_three);
-        answerFour = (RobotoRegularTextView) gameView.findViewById(R.id.answer_four);
+        question = gameView.findViewById(R.id.question);
+        answerOne = gameView.findViewById(R.id.answer_one);
+        answerTwo = gameView.findViewById(R.id.answer_two);
+        answerThree = gameView.findViewById(R.id.answer_three);
+        answerFour = gameView.findViewById(R.id.answer_four);
 
-        correctAnswerOne = (ImageView) gameView.findViewById(R.id.correct_answer_one);
-        ivOops = (ImageView) gameView.findViewById(R.id.ivOops);
+        correctAnswerOne = gameView.findViewById(R.id.correct_answer_one);
+        ivOops = gameView.findViewById(R.id.ivOops);
 
-        correctAnswerTwo = (ImageView) gameView.findViewById(R.id.correct_answer_two);
-        correctAnswerThree = (ImageView) gameView.findViewById(R.id.correct_answer_three);
-        correctAnswerFour = (ImageView) gameView.findViewById(R.id.correct_answer_four);
+        correctAnswerTwo = gameView.findViewById(R.id.correct_answer_two);
+        correctAnswerThree = gameView.findViewById(R.id.correct_answer_three);
+        correctAnswerFour = gameView.findViewById(R.id.correct_answer_four);
 
-        incorrectAnswerOne = (ImageView) gameView.findViewById(R.id.incorrect_answer_one);
-        incorrectAnswerTwo = (ImageView) gameView.findViewById(R.id.incorrect_answer_two);
-        incorrectAnswerThree = (ImageView) gameView.findViewById(R.id.incorrect_answer_three);
-        incorrectAnswerFour = (ImageView) gameView.findViewById(R.id.incorrect_answer_four);
-        scoreBox = (LinearLayout) gameView.findViewById(R.id.scorebox);
+        incorrectAnswerOne = gameView.findViewById(R.id.incorrect_answer_one);
+        incorrectAnswerTwo = gameView.findViewById(R.id.incorrect_answer_two);
+        incorrectAnswerThree = gameView.findViewById(R.id.incorrect_answer_three);
+        incorrectAnswerFour = gameView.findViewById(R.id.incorrect_answer_four);
+        scoreBox = gameView.findViewById(R.id.scorebox);
 
         answerOne.setOnClickListener(this);
         answerTwo.setOnClickListener(this);
         answerThree.setOnClickListener(this);
         answerFour.setOnClickListener(this);
-        logout.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCancelDialog(R.string.alert_message);
-            }
-        });
+        logout.setOnClickListener(v -> showCancelDialog(R.string.alert_message));
 
-        ((MainActivity) mContext).setOnBackPressListener(new QuizkBackPressedListener() {
-
-            @Override
-            public void onBackPress() {
-                showCancelDialog(R.string.alert_message);
-            }
-        });
+        ((MainActivity) mContext).setOnBackPressListener(() -> showCancelDialog(R.string.alert_message));
     }
 
     private void getQuizData() {
@@ -299,7 +287,7 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
     @Override
     public void onClick(View view) {
 
-        if(levelList==null)
+        if (levelList == null)
             return;
 
         switch (view.getId()) {
@@ -522,9 +510,9 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.level_failed_dialog_view);
-        RobotoRegularTextView messageView = (RobotoRegularTextView) dialog.findViewById(R.id.message);
+        RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(message);
-        RobotoRegularTextView continueGame = (RobotoRegularTextView) dialog.findViewById(R.id.continue_game);
+        RobotoRegularTextView continueGame = dialog.findViewById(R.id.continue_game);
         continueGame.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -565,9 +553,9 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.level_cleared_dialog_view);
-        RobotoRegularTextView messageView = (RobotoRegularTextView) dialog.findViewById(R.id.message);
+        RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(message);
-        RobotoRegularTextView continueGame = (RobotoRegularTextView) dialog.findViewById(R.id.continue_game);
+        RobotoRegularTextView continueGame = dialog.findViewById(R.id.continue_game);
         continueGame.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -584,9 +572,9 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.congratulation_dialog_view);
-        RobotoRegularTextView messageView = (RobotoRegularTextView) dialog.findViewById(R.id.message);
+        RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText("You Have Won " + message);
-        RobotoRegularTextView clickNow = (RobotoRegularTextView) dialog.findViewById(R.id.click_now);
+        RobotoRegularTextView clickNow = dialog.findViewById(R.id.click_now);
         clickNow.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -608,10 +596,10 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.cancel_alert_dialog_view);
-        RobotoRegularTextView messageView = (RobotoRegularTextView) dialog.findViewById(R.id.message);
+        RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(resource);
-        RobotoRegularTextView cancel = (RobotoRegularTextView) dialog.findViewById(R.id.cancel);
-        RobotoRegularTextView ok = (RobotoRegularTextView) dialog.findViewById(R.id.ok);
+        RobotoRegularTextView cancel = dialog.findViewById(R.id.cancel);
+        RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
         cancel.setOnClickListener(new OnClickListener() {
 
             @Override
