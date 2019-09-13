@@ -21,6 +21,7 @@ import com.clairvoyant.naijamenu.R;
 import com.clairvoyant.naijamenu.bean.BrandPromotionRequestBean;
 import com.clairvoyant.naijamenu.bean.BrandPromotionResponseBean;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -105,7 +106,15 @@ public class DownloadVideoService extends IntentService {
                     Utils.longInfo(response);
 
                     try {
-                        BrandPromotionResponseBean brandResponse = new Gson().fromJson(response, BrandPromotionResponseBean.class);
+
+                        BrandPromotionResponseBean brandResponse = null;
+                        try {
+                            brandResponse = new Gson().fromJson(response, BrandPromotionResponseBean.class);
+                        } catch (JsonSyntaxException e) {
+                            brandResponse =  new Gson().fromJson(response.substring(response.length()-62, response.length()), BrandPromotionResponseBean.class);
+                        }
+
+
                         if (brandResponse != null && brandResponse.isStatus()) {
                             String videoUrl = brandResponse.getBrandVideoUrl();
                             if (!TextUtils.isEmpty(videoUrl)) {
@@ -124,7 +133,7 @@ public class DownloadVideoService extends IntentService {
                             Log.d(TAG, "false response from server when consuming GetBrandPromotion API");
                         }
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Log.d(TAG, e.getMessage());
                     }
                 }
             }

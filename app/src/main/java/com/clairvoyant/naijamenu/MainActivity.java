@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, " onCreate()");
         mContext = this;
         /*
          * if (!Utils.isOnline(mContext)){

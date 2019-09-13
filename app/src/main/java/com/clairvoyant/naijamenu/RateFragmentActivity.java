@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
@@ -21,6 +22,8 @@ import com.clairvoyant.naijamenu.utils.Utils;
 import java.util.ArrayList;
 
 public class RateFragmentActivity extends AppCompatActivity {
+
+    private static String TAG = RateFragmentActivity.class.getSimpleName();
 
     String[] tabNames = {"RATE OUR RECIPES", "RATE OUR RESTAURANT"};
     private ViewPager mViewPager;
@@ -34,6 +37,7 @@ public class RateFragmentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, " onCreate()");
         setContentView(R.layout.menu_fragment_activity);
         mContext = this;
 

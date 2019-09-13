@@ -134,20 +134,29 @@
                 android:textColor="@color/dark_gray"
                 android:textSize="@dimen/sixteen_sp" />
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/one_px"
                 android:layout_marginLeft="@dimen/twelve_dp"
                 android:background="@color/dark_gray"
                 android:layout_marginStart="@dimen/twelve_dp" />
 
-            <TextView
-                android:id="@+id/description"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/twelve_dp"
-                android:textColor="@color/medium_gray"
-                android:textSize="@dimen/sixteen_sp" />
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:padding="@dimen/twelve_dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/medium_gray"
+                        android:textSize="@dimen/sixteen_sp" />
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
 
         <TextView

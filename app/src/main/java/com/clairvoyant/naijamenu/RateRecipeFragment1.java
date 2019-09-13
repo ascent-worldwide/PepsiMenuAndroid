@@ -80,6 +80,7 @@ public class RateRecipeFragment1 extends Fragment implements OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG, " onCreateView()");
         mContext = getActivity();
         recipeView = inflater.inflate(R.layout.fragment_rate_recipe1, container, false);
         initializeViews(recipeView, inflater, container);
@@ -582,22 +583,12 @@ public class RateRecipeFragment1 extends Fragment implements OnClickListener {
             dialog.show();
             RobotoRegularTextView tvTryAgain = dialog.findViewById(R.id.tvTryAgain);
             RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
-            tvTryAgain.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                    validateFields();
-                }
+            tvTryAgain.setOnClickListener(v -> {
+                dialog.dismiss();
+                validateFields();
             });
 
-            ok.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
+            ok.setOnClickListener(v -> dialog.dismiss());
         }
     }
 

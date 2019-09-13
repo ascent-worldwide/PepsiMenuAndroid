@@ -81,6 +81,7 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, " onCreate()");
         mContext = this;
         setContentView(R.layout.menu_fragment_activity);
         Utils.setOrientation(mContext);
@@ -95,7 +96,7 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
                 e.printStackTrace();
             }
             // toolbar.setLogo(R.drawable.header_logo);
-            ImageView logo = (ImageView) toolbar.findViewById(R.id.logo);
+            ImageView logo = toolbar.findViewById(R.id.logo);
             Glide.with(mContext).load(PreferencesUtils.getString(mContext, Constants.RESTAURANT_LOGO)).centerCrop().placeholder(R.drawable.pepsi_logo).fitCenter().into(logo);
 
 
@@ -124,13 +125,13 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
         }
         // tabs.setBackgroundColor(getResources().getColor(R.color.orange));
 
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mViewPager = findViewById(R.id.viewpager);
 
-        ListView listView = (ListView) findViewById(R.id.drawer_list);
-        RelativeLayout logout = (RelativeLayout) findViewById(R.id.logoutbox);
+        ListView listView = findViewById(R.id.drawer_list);
+        RelativeLayout logout = findViewById(R.id.logoutbox);
         logout.setOnClickListener(this);
-        drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer);
-        listbox = (RelativeLayout) findViewById(R.id.listbox);
+        drawerLayout = findViewById(R.id.navigation_drawer);
+        listbox = findViewById(R.id.listbox);
         List<DrawerBean> list = getDraweeList();
         mAdapter = new SlidingDrawerAdapter(mContext, R.layout.slide_menu_row, list);
         listView.setAdapter(mAdapter);
@@ -149,51 +150,47 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
 
         initialTabInitialization();
 
-        listView.setOnItemClickListener(new OnItemClickListener() {
+        listView.setOnItemClickListener((parent, view, position, id) -> {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            drawerLayout.closeDrawer(listbox);
 
-                drawerLayout.closeDrawer(listbox);
+            Intent intent12 = new Intent(mContext, MainActivity.class);
 
-                Intent intent = new Intent(mContext, MainActivity.class);
+            switch (position) {
 
-                switch (position) {
+                case 0:
+                    Intent intent1 = new Intent(mContext, HomeActivity.class);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent1);
+                    finish();
+                    break;
+                case 1:
+                    intent12.putExtra("MENU", 1);
+                    startActivity(intent12);
+                    finish();
+                    break;
 
-                    case 0:
-                        Intent intent1 = new Intent(mContext, HomeActivity.class);
-                        intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent1);
-                        finish();
-                        break;
-                    case 1:
-                        intent.putExtra("MENU", 1);
-                        startActivity(intent);
-                        finish();
-                        break;
+                case 2:
+                    intent12.putExtra("MENU", 2);
+                    startActivity(intent12);
+                    finish();
+                    break;
 
-                    case 2:
-                        intent.putExtra("MENU", 2);
-                        startActivity(intent);
-                        finish();
-                        break;
+                case 3:
+                    intent12.putExtra("MENU", 3);
+                    startActivity(intent12);
+                    finish();
+                    break;
 
-                    case 3:
-                        intent.putExtra("MENU", 3);
-                        startActivity(intent);
-                        finish();
-                        break;
+                case 4:
+                    intent12.putExtra("MENU", 4);
+                    startActivity(intent12);
+                    finish();
+                    break;
 
-                    case 4:
-                        intent.putExtra("MENU", 4);
-                        startActivity(intent);
-                        finish();
-                        break;
-
-                    case 5:
-                        new PasswordConfirmationDialog(MenuFragmentActivity.this, view, position);
-                        break;
-                }
+                case 5:
+                    new PasswordConfirmationDialog(MenuFragmentActivity.this, view, position);
+                    break;
             }
         });
 
@@ -206,10 +203,9 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
         if (menuList != null && menuList.size() > 0) {
             for (int i = 0; i < menuList.size(); i++) {
                 if ("Y".equalsIgnoreCase(menuList.get(i).getDoescontainCat())) {
-                    fragmentList
-                            .add((SubCategoryFragment) Fragment.instantiate(this, SubCategoryFragment.class.getName()));
+                    fragmentList.add(Fragment.instantiate(this, SubCategoryFragment.class.getName()));
                 } else {
-                    fragmentList.add((ProductsFragment) Fragment.instantiate(this, ProductsFragment.class.getName()));
+                    fragmentList.add(Fragment.instantiate(this, ProductsFragment.class.getName()));
                 }
             }
         }

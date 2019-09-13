@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.clairvoyant.naijamenu.MenuFragmentActivity;
 import com.clairvoyant.naijamenu.R;
@@ -40,17 +41,14 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
         final MenuCategoryBean mMenuBean = menuList.get(position);
         MenuViewHolder.menuName.setText(mMenuBean.getCategoryName());
         Utils.renderImage(mContext, mMenuBean.getCategoryURL(), MenuViewHolder.menuImage);
-        MenuViewHolder.menuImage.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, MenuFragmentActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("POSITION", position);
-                bundle.putSerializable("PRODUCTS", menuList);
-                intent.putExtra("PRODUCT_BUNDLE", bundle);
-                mContext.startActivity(intent);
+        MenuViewHolder.rootView.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, MenuFragmentActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("POSITION", position);
+            bundle.putSerializable("PRODUCTS", menuList);
+            intent.putExtra("PRODUCT_BUNDLE", bundle);
+            mContext.startActivity(intent);
 //				mContext.finish();
-            }
         });
     }
 
@@ -63,11 +61,13 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
 
     class MenuViewHolder extends RecyclerView.ViewHolder {
 
+        private RelativeLayout rootView;
         private ImageView menuImage;
         private RobotoLightTextView menuName;
 
         private MenuViewHolder(View view) {
             super(view);
+            rootView = view.findViewById(R.id.rootView);
             menuImage = view.findViewById(R.id.iv_menu_image);
             menuName = view.findViewById(R.id.tv_menu_name);
         }

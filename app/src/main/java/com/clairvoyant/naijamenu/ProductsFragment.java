@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,6 +47,7 @@ import java.util.Map;
 
 public class ProductsFragment extends Fragment {
 
+    private static String TAG = ProductsFragment.class.getSimpleName();
     private RecyclerView menuRecycler;
     private int columns = 4;
     private View menuView;
@@ -62,7 +64,8 @@ public class ProductsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG, " onCreateView()");
 
         if (getArguments() != null) {
             categoryId = getArguments().getInt("CATEGORY_ID");
@@ -74,7 +77,7 @@ public class ProductsFragment extends Fragment {
 
             if (Utils.isOnline(mContext)) {
                 progressView.setVisibility(View.VISIBLE);
-                getMenuItem(Constants.PRODUCT_BY_CATEGORY_ID_API, categoryId);
+                getMenuItem(categoryId);
             } else if (!TextUtils.isEmpty(DatabaseHelper.getProductDataByCategoryId(mContext, String.valueOf(categoryId)))) {
                 initialiseViews(inflater, container);
                 String resString = DatabaseHelper.getProductDataByCategoryId(mContext, String.valueOf(categoryId));
@@ -126,7 +129,7 @@ public class ProductsFragment extends Fragment {
         startActivity(intent);
     }
 
-    private void getMenuItem(final String api, int categoryId) {
+    private void getMenuItem(int categoryId) {
 
         ProductRequestBean requestBean = new ProductRequestBean();
         requestBean.setApp_version(Utils.getAppVersion(mContext));
@@ -138,13 +141,13 @@ public class ProductsFragment extends Fragment {
 
         final String param = new Gson().toJson(requestBean, ProductRequestBean.class);
 
-        StringRequest request = new StringRequest(Method.POST, api, menuSuccess(), menuError()) {
+        StringRequest request = new StringRequest(Method.POST, Constants.PRODUCT_BY_CATEGORY_ID_API, menuSuccess(), menuError()) {
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("data", param);
-                Log.i("PRODUCT_PARAM", api + "\n" + param.toString());
+                Log.i("PRODUCT_PARAM", Constants.PRODUCT_BY_CATEGORY_ID_API + "\n" + param.toString());
                 return params;
             }
         };
@@ -191,18 +194,18 @@ public class ProductsFragment extends Fragment {
     protected void parsingLogic(ProductBeanOuter productBeanOuter) {
         ProductBean[] productArray = productBeanOuter.getProductlist();
         ArrayList<ProductBean> productList = new ArrayList<>();
-        for (int i = 0; i < productArray.length; i++) {
+        for (ProductBean bean : productArray) {
             ProductBean productBean = new ProductBean();
-            productBean.setProductId(productArray[i].getProductId());
-            productBean.setProductName(productArray[i].getProductName());
-            productBean.setProductDesc(productArray[i].getProductDesc());
-            productBean.setPrice(productArray[i].getPrice());
-            productBean.setProductType(productArray[i].getProductType());
-            productBean.setSpiceLevel(productArray[i].getSpiceLevel());
-            productBean.setPreparationTime(productArray[i].getPreparationTime());
-            productBean.setDetail_url_type(productArray[i].getDetail_url_type());
-            productBean.setProductUrl(productArray[i].getProductUrl());
-            productBean.setProductDetailUrl(productArray[i].getProductDetailUrl());
+            productBean.setProductId(bean.getProductId());
+            productBean.setProductName(bean.getProductName());
+            productBean.setProductDesc(bean.getProductDesc());
+            productBean.setPrice(bean.getPrice());
+            productBean.setProductType(bean.getProductType());
+            productBean.setSpiceLevel(bean.getSpiceLevel());
+            productBean.setPreparationTime(bean.getPreparationTime());
+            productBean.setDetail_url_type(bean.getDetail_url_type());
+            productBean.setProductUrl(bean.getProductUrl());
+            productBean.setProductDetailUrl(bean.getProductDetailUrl());
             productList.add(productBean);
         }
 

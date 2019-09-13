@@ -22,6 +22,8 @@ import com.clairvoyant.naijamenu.utils.Utils;
 import java.io.File;
 
 public class VideoViewFragment extends Fragment {
+
+    private static String TAG = VideoViewFragment.class.getSimpleName();
     private Context mContext;
     private VideoView videoView;
     private Interface1 mInterface;
@@ -60,6 +62,7 @@ public class VideoViewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG, " onCreateView()");
         View rootView = inflater.inflate(R.layout.activity_video_view, container, false);
         initialiseViews(rootView);
         return rootView;

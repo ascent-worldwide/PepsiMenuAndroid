@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.clairvoyant.naijamenu.utils.Constants;
@@ -16,11 +17,14 @@ import com.clairvoyant.naijamenu.utils.PreferencesUtils;
 
 public class BrandPromotionActivity extends AppCompatActivity implements Interface1 {
 
+    private static String TAG = BrandPromotionActivity.class.getSimpleName();
     private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, " onCreate()");
+
         setContentView(R.layout.activity_brand_promotion);
 
         mContext = this;

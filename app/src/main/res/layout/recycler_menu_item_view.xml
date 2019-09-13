@@ -5,9 +5,10 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/sixteen_dp"
     card_view:cardCornerRadius="@dimen/three_dp"
-    card_view:cardElevation="@dimen/three_dp">
+    card_view:cardElevation="@dimen/twelve_dp">
 
     <RelativeLayout
+        android:id="@+id/rootView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -26,8 +27,9 @@
             android:layout_below="@+id/iv_menu_image"
             android:background="@color/black_fifty_percent"
             android:ellipsize="end"
-            android:gravity="center_vertical|center_horizontal"
+            android:gravity="center"
             android:padding="@dimen/ten_dp"
+            android:maxLines="1"
             android:singleLine="true"
             android:textAllCaps="true"
             android:textColor="@color/white"

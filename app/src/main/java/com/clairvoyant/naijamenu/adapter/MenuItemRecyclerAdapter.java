@@ -139,7 +139,7 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
             MenuViewHolder.spiceLevel5.setVisibility(View.VISIBLE);
         }
 
-        MenuViewHolder.productImage.setOnClickListener(v -> {
+        MenuViewHolder.rootView.setOnClickListener(v -> {
 
             final Dialog dialog = new Dialog(mContext);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -229,22 +229,18 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
                 }
             });
 
-            slideRight.setOnClickListener(new OnClickListener() {
+            slideRight.setOnClickListener(v14 -> {
 
-                @Override
-                public void onClick(View v) {
+                if (count > 1 && viewPager.getCurrentItem() < count) {
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                    if (viewPager.getCurrentItem() == (count - 1)) {
+                        slideRight.setImageResource(R.drawable.arrow_right_disabled);
+                    } else {
+                        slideRight.setImageResource(R.drawable.arrow_right_enabled);
+                    }
 
-                    if (count > 1 && viewPager.getCurrentItem() < count) {
-                        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-                        if (viewPager.getCurrentItem() == (count - 1)) {
-                            slideRight.setImageResource(R.drawable.arrow_right_disabled);
-                        } else {
-                            slideRight.setImageResource(R.drawable.arrow_right_enabled);
-                        }
-
-                        if (count > 1 && viewPager.getCurrentItem() > 0) {
-                            slideLeft.setImageResource(R.drawable.arrow_left_enabled);
-                        }
+                    if (count > 1 && viewPager.getCurrentItem() > 0) {
+                        slideLeft.setImageResource(R.drawable.arrow_left_enabled);
                     }
                 }
             });
@@ -414,6 +410,7 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
 
     class MenuViewHolder extends RecyclerView.ViewHolder {
 
+        LinearLayout rootView;
         ImageView productImage;
         TextView productName;
         TextView productDesc;
@@ -427,6 +424,7 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
 
         MenuViewHolder(View view) {
             super(view);
+            rootView = view.findViewById(R.id.rootView);
             productImage = view.findViewById(R.id.product_image);
             productName = view.findViewById(R.id.product_name);
             productDesc = view.findViewById(R.id.product_desc);

@@ -38,6 +38,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PromotionalFragment extends Fragment {
+
+    private static String TAG = PromotionalFragment.class.getSimpleName();
     private Context mContext;
     private RelativeLayout progressView;
     private RobotoRegularTextView skip;
@@ -51,6 +53,7 @@ public class PromotionalFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // View rootView = inflater.inflate(R.layout.activity_video_view, container, false);
+        Log.d(TAG, " onCreateView()");
 
         mContext = getActivity();
         initialiseViews(inflater, container);

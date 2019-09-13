@@ -44,6 +44,7 @@ import java.util.Map;
 
 public class PromotionActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
+    private static String TAG = PromotionActivity.class.getSimpleName();
     private static final int RECOVERY_DIALOG_REQUEST = 1;
     private YouTubePlayerView youTubeView;
     private DynamicHeightViewPager promotionViewPager;
@@ -60,6 +61,7 @@ public class PromotionActivity extends YouTubeBaseActivity implements YouTubePla
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, " onCreate()");
         mContext = this;
         if (!Utils.isOnline(mContext)) {
             // no internet
@@ -316,22 +318,18 @@ public class PromotionActivity extends YouTubeBaseActivity implements YouTubePla
                         @Override
                         public void run() {
                             skip.setVisibility(View.VISIBLE);
-                            skip.setOnClickListener(new OnClickListener() {
-
-                                @Override
-                                public void onClick(View v) {
-                                    if (restaurantPromotion) {
-                                        Intent intent = new Intent(mContext, RestaurantPromotionActivity.class);
-                                        intent.putExtra("RESTAURANT_PROMOTION", restaurantPromotionUrl);
-                                        intent.putExtra("MENU", menuId);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        Intent intent = new Intent(mContext, MainActivity.class);
-                                        intent.putExtra("MENU", menuId);
-                                        startActivity(intent);
-                                        finish();
-                                    }
+                            skip.setOnClickListener(v -> {
+                                if (restaurantPromotion) {
+                                    Intent intent = new Intent(mContext, RestaurantPromotionActivity.class);
+                                    intent.putExtra("RESTAURANT_PROMOTION", restaurantPromotionUrl);
+                                    intent.putExtra("MENU", menuId);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Intent intent = new Intent(mContext, MainActivity.class);
+                                    intent.putExtra("MENU", menuId);
+                                    startActivity(intent);
+                                    finish();
                                 }
                             });
                         }

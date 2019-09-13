@@ -31,12 +31,15 @@ import java.util.Map;
 
 public class QuizPromotionActivity extends AppCompatActivity {
 
+    private static String TAG = QuizPromotionActivity.class.getSimpleName();
+
     private Context mContext;
     private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, " onCreate()");
         mContext = this;
 
         if (!Utils.isOnline(mContext)) {
@@ -54,15 +57,11 @@ public class QuizPromotionActivity extends AppCompatActivity {
                 image = findViewById(R.id.imageView);
                 TextView startQuiz = findViewById(R.id.start_quiz);
                 final int menuId = getIntent().getIntExtra("MENU", 0);
-                startQuiz.setOnClickListener(new OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(QuizPromotionActivity.this, MainActivity.class);
-                        intent.putExtra("MENU", menuId);
-                        startActivity(intent);
-                        finish();
-                    }
+                startQuiz.setOnClickListener(v -> {
+                    Intent intent1 = new Intent(QuizPromotionActivity.this, MainActivity.class);
+                    intent1.putExtra("MENU", menuId);
+                    startActivity(intent1);
+                    finish();
                 });
             }
         }

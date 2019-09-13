@@ -31,6 +31,8 @@ import java.util.Map;
 
 public class GamePlayRegistration extends AppCompatActivity {
 
+    private static String TAG = GamePlayRegistration.class.getSimpleName();
+
     private RobotoRegularEditText name, email, phoneNumber;
     private RobotoRegularButton btnSubmit;
     private Context mContext;
@@ -41,6 +43,7 @@ public class GamePlayRegistration extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, " onCreate()");
         setContentView(R.layout.activity_game_registration);
         mContext = this;
         Utils.setOrientation(mContext);

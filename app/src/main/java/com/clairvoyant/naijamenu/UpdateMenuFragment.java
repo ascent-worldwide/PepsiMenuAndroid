@@ -54,6 +54,7 @@ import java.util.Set;
 
 public class UpdateMenuFragment extends Fragment {
 
+    private static String TAG = UpdateMenuFragment.class.getSimpleName();
     private View mUpdateManuView;
     private Context mContext;
     private ProgressBar mProgressBar;
@@ -65,6 +66,7 @@ public class UpdateMenuFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG, " onCreateView()");
         mContext = getActivity();
         updatedMenuVersion = getArguments().getInt(Constants.UPDATED_MENU_VERSION);
         mUpdateManuView = inflater.inflate(R.layout.fragment_update_menu, container, false);

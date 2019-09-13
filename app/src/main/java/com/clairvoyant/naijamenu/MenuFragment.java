@@ -56,7 +56,7 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext = getActivity();
-
+        Log.d(TAG, " onCreateView()");
         if (Utils.isOnline(mContext)) {
             inflatelayout(inflater, container);
             if (Utils.isOnline(mContext)) {

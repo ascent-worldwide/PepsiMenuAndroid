@@ -53,6 +53,7 @@ import java.util.Map;
 
 public class RateRestaurantFragment extends Fragment implements OnClickListener {
 
+    private static String TAG = RateRestaurantFragment.class.getSimpleName();
     private View restaurantView;
     private RobotoRegularEditText name, mobileNumber, email;
     private RobotoRegularTextView birthday, anniversary, questionOne, questionTwo, questionThree, questionFour;
@@ -71,6 +72,7 @@ public class RateRestaurantFragment extends Fragment implements OnClickListener 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG, " onCreateView()");
         mContext = getActivity();
         if (!Utils.isOnline(mContext)) {
             String surveyQuestionJSON = DatabaseHelper.getSurveyQuestionsJson(mContext);
@@ -330,22 +332,12 @@ public class RateRestaurantFragment extends Fragment implements OnClickListener 
             dialog.show();
             RobotoRegularTextView tvTryAgain = dialog.findViewById(R.id.tvTryAgain);
             RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
-            tvTryAgain.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                    validateFields();
-                }
+            tvTryAgain.setOnClickListener(v -> {
+                dialog.dismiss();
+                validateFields();
             });
 
-            ok.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
+            ok.setOnClickListener(v -> dialog.dismiss());
         }
     }
 

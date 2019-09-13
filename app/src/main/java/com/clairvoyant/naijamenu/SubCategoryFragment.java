@@ -1,5 +1,6 @@
 package com.clairvoyant.naijamenu;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -14,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,7 @@ import java.util.ArrayList;
 
 public class SubCategoryFragment extends Fragment {
 
+    private static String TAG = SubCategoryFragment.class.getSimpleName();
     private RecyclerView menuRecycler;
     private int columns = 4;
     private View menuView;
@@ -42,7 +45,7 @@ public class SubCategoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext = getActivity();
-
+        Log.d(TAG, " onCreateView()");
         // if (Utils.isOnline(mContext)) {
         menuView = inflater.inflate(R.layout.menu_category_fragment, container, false);
 
@@ -120,7 +123,7 @@ public class SubCategoryFragment extends Fragment {
             final MenuCategoryBean mMenuBean = menuList.get(position);
             MenuViewHolder.menuName.setText(mMenuBean.getCategoryName());
             Utils.renderImage(mContext, mMenuBean.getCategoryURL(), MenuViewHolder.menuImage);
-            MenuViewHolder.menuImage.setOnClickListener(v -> {
+            MenuViewHolder.rootView.setOnClickListener(v -> {
                 Intent intent = new Intent(mContext, MenuFragmentActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("POSITION", position);
@@ -135,18 +138,19 @@ public class SubCategoryFragment extends Fragment {
         @NonNull
         @Override
         public MenuViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
-            View categoryView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_menu_item_view,
-                    viewGroup, false);
+            View categoryView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_menu_item_view, viewGroup, false);
             return new MenuViewHolder(categoryView);
         }
 
         class MenuViewHolder extends RecyclerView.ViewHolder {
 
+            private RelativeLayout rootView;
             private ImageView menuImage;
             private RobotoLightTextView menuName;
 
             private MenuViewHolder(View view) {
                 super(view);
+                rootView = view.findViewById(R.id.rootView);
                 menuImage = view.findViewById(R.id.iv_menu_image);
                 menuName = view.findViewById(R.id.tv_menu_name);
             }
@@ -154,6 +158,7 @@ public class SubCategoryFragment extends Fragment {
     }
 
     // DownloadImage AsyncTask
+    @SuppressLint("StaticFieldLeak")
     private class DownloadImage extends AsyncTask<String, Void, Bitmap> {
 
         @Override

@@ -68,6 +68,7 @@ public class RateRecipeFragment extends Fragment implements OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG, " onCreateView()");
         mContext = getActivity();
         recipeView = inflater.inflate(R.layout.fragment_rate_recipe, container, false);
         initializeViews(recipeView);

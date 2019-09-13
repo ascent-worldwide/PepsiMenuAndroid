@@ -46,6 +46,7 @@ import java.util.Map;
 
 public class GamePlayFragment extends Fragment implements OnClickListener {
 
+    private static String TAG = GamePlayFragment.class.getSimpleName();
     private Activity mContext;
     private View gameView;
     private RelativeLayout progressView, rlChildLayout;
@@ -75,6 +76,7 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG, " onCreateView()");
         mContext = getActivity();
         if (!Utils.isOnline(mContext)) {
             gameView = inflater.inflate(R.layout.no_network_activity, container, false);
