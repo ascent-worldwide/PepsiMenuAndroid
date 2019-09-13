@@ -5,7 +5,7 @@
     android:background="@color/content_background"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -85,7 +85,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/one_px"
-                    android:background="@color/dark_gray"></LinearLayout>
+                    android:background="@color/dark_gray" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -131,14 +131,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:baselineAligned="false">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/five_dp"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:layout_marginEnd="@dimen/five_dp">
 
                             <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
                                 android:layout_width="wrap_content"
@@ -155,10 +157,12 @@
                                 android:background="@drawable/border_all_gray_rounded"
                                 android:drawableRight="@drawable/calendar_icon"
                                 android:gravity="center_vertical"
-                                android:hint="Select Birthday"
+                                android:hint="@string/select_birthday"
                                 android:paddingLeft="@dimen/ten_dp"
                                 android:textColor="@color/medium_gray"
-                                android:textSize="@dimen/twenty_sp" />
+                                android:textSize="@dimen/twenty_sp"
+                                android:drawableEnd="@drawable/calendar_icon"
+                                android:paddingStart="@dimen/ten_dp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -166,7 +170,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/five_dp"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:layout_marginStart="@dimen/five_dp">
 
                             <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
                                 android:layout_width="wrap_content"
@@ -183,10 +188,12 @@
                                 android:background="@drawable/border_all_gray_rounded"
                                 android:drawableRight="@drawable/calendar_icon"
                                 android:gravity="center_vertical"
-                                android:hint="Select Anniversary"
+                                android:hint="@string/select_anniversary"
                                 android:paddingLeft="@dimen/ten_dp"
                                 android:textColor="@color/medium_gray"
-                                android:textSize="@dimen/twenty_sp" />
+                                android:textSize="@dimen/twenty_sp"
+                                android:drawableEnd="@drawable/calendar_icon"
+                                android:paddingStart="@dimen/ten_dp" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>

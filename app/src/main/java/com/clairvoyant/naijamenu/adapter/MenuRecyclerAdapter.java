@@ -69,7 +69,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
         private MenuViewHolder(View view) {
             super(view);
             menuImage = view.findViewById(R.id.iv_menu_image);
-            menuName = (RobotoLightTextView) view.findViewById(R.id.tv_menu_name);
+            menuName = view.findViewById(R.id.tv_menu_name);
         }
     }
 }

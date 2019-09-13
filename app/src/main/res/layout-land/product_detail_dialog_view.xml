@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:baselineAligned="false">
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -17,23 +18,28 @@
             <com.clairvoyant.naijamenu.utils.DynamicHeightViewPager
                 android:id="@+id/product_detail_viewpager"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></com.clairvoyant.naijamenu.utils.DynamicHeightViewPager>
+                android:layout_height="wrap_content">
+            </com.clairvoyant.naijamenu.utils.DynamicHeightViewPager>
 
             <ImageView
                 android:id="@+id/left"
+                android:contentDescription="@string/content_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/arrow_left_disabled" />
+                android:src="@drawable/arrow_left_disabled"
+                android:layout_alignParentStart="true" />
 
             <ImageView
                 android:id="@+id/right"
+                android:contentDescription="@string/content_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/arrow_right_disabled" />
+                android:src="@drawable/arrow_right_disabled"
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -69,33 +75,44 @@
                 android:padding="@dimen/twelve_dp"
                 android:textColor="@color/dark_gray"
                 android:textSize="@dimen/twenty_four_sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_toStartOf="@+id/veg_nonveg" />
 
             <ImageView
                 android:id="@+id/veg_nonveg"
+                android:contentDescription="@string/content_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/twelve_dp"
                 android:layout_marginRight="70dp"
-                android:src="@drawable/veg_icon" />
+                android:src="@drawable/veg_icon"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/twelve_dp"
+                android:layout_marginEnd="70dp" />
 
             <ImageView
                 android:id="@+id/close1"
+                android:contentDescription="@string/content_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="@dimen/twelve_dp"
-                android:src="@drawable/red_cross" />
+                android:src="@drawable/red_cross"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/twelve_dp" />
 
             <ImageView
                 android:id="@+id/close"
+                android:contentDescription="@string/content_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="@dimen/twelve_dp"
-                android:src="@drawable/red_cross" />
+                android:src="@drawable/red_cross"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/twelve_dp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -121,7 +138,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/one_px"
                 android:layout_marginLeft="@dimen/twelve_dp"
-                android:background="@color/dark_gray" />
+                android:background="@color/dark_gray"
+                android:layout_marginStart="@dimen/twelve_dp" />
 
             <TextView
                 android:id="@+id/description"
@@ -158,52 +176,64 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:textColor="@color/red"
-                android:textSize="@dimen/twenty_sp" />
+                android:textSize="@dimen/twenty_sp"
+                android:layout_alignParentStart="true"
+                android:drawableStart="@drawable/naira_icon" />
 
             <ImageView
                 android:id="@+id/chilli1"
+                android:contentDescription="@string/content_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:adjustViewBounds="true"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_alignParentEnd="true" />
 
             <ImageView
                 android:id="@+id/chilli2"
+                android:contentDescription="@string/content_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/chilli1"
                 android:adjustViewBounds="true"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_toStartOf="@+id/chilli1" />
 
             <ImageView
                 android:id="@+id/chilli3"
+                android:contentDescription="@string/content_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/chilli2"
                 android:adjustViewBounds="true"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_toStartOf="@+id/chilli2" />
 
             <ImageView
                 android:id="@+id/chilli4"
+                android:contentDescription="@string/content_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/chilli3"
                 android:adjustViewBounds="true"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_toStartOf="@+id/chilli3" />
 
             <ImageView
                 android:id="@+id/chilli5"
+                android:contentDescription="@string/content_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/chilli4"
                 android:adjustViewBounds="true"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_toStartOf="@+id/chilli4" />
         </RelativeLayout>
     </RelativeLayout>
 

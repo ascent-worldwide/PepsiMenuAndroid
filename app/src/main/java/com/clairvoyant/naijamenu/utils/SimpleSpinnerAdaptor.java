@@ -1,6 +1,8 @@
 package com.clairvoyant.naijamenu.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,18 +27,20 @@ public class SimpleSpinnerAdaptor extends ArrayAdapter<String> {
         inflater = LayoutInflater.from(mContext);
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    @SuppressLint("ViewHolder")
+    @NonNull
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
         convertView = inflater.inflate(R.layout.spinner_item, parent, false);
         return convertView;
     }
 
 
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+    public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(R.layout.spinner_item, parent, false);
-        RobotoLightTextView category = (RobotoLightTextView) convertView.findViewById(R.id.spinner_textview);
+        RobotoLightTextView category = convertView.findViewById(R.id.spinner_textview);
         category.setText(categoryList.get(position));
         return convertView;
 

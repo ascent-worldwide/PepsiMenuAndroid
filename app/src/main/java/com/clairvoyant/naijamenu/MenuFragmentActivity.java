@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -64,13 +65,10 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
     private ArrayList<MenuCategoryBean> menuList;
     private int passedPosition = 0;
     private String[] menuNames;
-    private MenuViewPagerAdapter pagerAdapter;
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout drawerLayout;
-    private ListView listView;
     private RelativeLayout listbox;
     private boolean subCategory;
-    private RelativeLayout logout;
 
     private Integer[] draweeIcon = {R.drawable.home_unselected, R.drawable.menu_unselected,
             R.drawable.challenge_unselected, R.drawable.rate_recipe_unselected, R.drawable.rate_restaurant_unselected,
@@ -115,7 +113,7 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
 
             getSupportActionBar().setTitle("");
         }
-        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabs = findViewById(R.id.tabs);
         try {
             tabs.setBackgroundColor(
                     Color.parseColor(PreferencesUtils.getString(mContext, Constants.RESTAURANT_THEME, "#f25a43")));
@@ -128,8 +126,8 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        listView = (ListView) findViewById(R.id.drawer_list);
-        logout = (RelativeLayout) findViewById(R.id.logoutbox);
+        ListView listView = (ListView) findViewById(R.id.drawer_list);
+        RelativeLayout logout = (RelativeLayout) findViewById(R.id.logoutbox);
         logout.setOnClickListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer);
         listbox = (RelativeLayout) findViewById(R.id.listbox);
@@ -216,7 +214,7 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
             }
         }
 
-        pagerAdapter = new MenuViewPagerAdapter(getSupportFragmentManager(), menuList, fragmentList);
+        MenuViewPagerAdapter pagerAdapter = new MenuViewPagerAdapter(getSupportFragmentManager(), menuList, fragmentList);
         mViewPager.setAdapter(pagerAdapter);
         tabs.setViewPager(mViewPager);
         mViewPager.setCurrentItem(passedPosition);
@@ -316,18 +314,18 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
                 // R.color.white));
                 // logout.setBackgroundColor(ContextCompat.getColor(mContext,
                 // R.color.red_variant_1));
-                showConfirmationDialog(R.string.please_confirm_password);
+                showConfirmationDialog();
                 break;
         }
     }
 
-    private void showConfirmationDialog(int resource) {
+    private void showConfirmationDialog() {
         final Dialog dialog = new Dialog(mContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.logout_alert_dialog_view);
         RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
-        messageView.setText(resource);
+        messageView.setText(R.string.please_confirm_password);
         RobotoRegularTextView cancel = dialog.findViewById(R.id.cancel);
         RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
         final RobotoRegularEditText etPassword = dialog.findViewById(R.id.etPassword);
@@ -337,7 +335,7 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
         });
 
         ok.setOnClickListener(v -> {
-            String password = etPassword.getText().toString().trim();
+            String password = Objects.requireNonNull(etPassword.getText()).toString().trim();
             String userPassword = PreferencesUtils.getString(mContext, Constants.PASSWORD, "");
             if (TextUtils.isEmpty(password)) {
                 Toast.makeText(mContext, getString(R.string.please_enter_password), Toast.LENGTH_SHORT).show();
@@ -360,7 +358,7 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
     }
 
     public void hideSoftKeyboard(Dialog dialog) {
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        Objects.requireNonNull(dialog.getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     public void hideSoftKeyboard() {
@@ -390,7 +388,7 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
         private ArrayList<MenuCategoryBean> menuList;
         private List<Fragment> fragmentList;
 
-        public MenuViewPagerAdapter(FragmentManager fm, ArrayList<MenuCategoryBean> menuList,
+        private MenuViewPagerAdapter(FragmentManager fm, ArrayList<MenuCategoryBean> menuList,
                                     List<Fragment> fragmentList) {
             super(fm);
             this.menuList = menuList;
@@ -428,10 +426,11 @@ public class MenuFragmentActivity extends AppCompatActivity implements OnClickLi
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             try {
                 if (position >= getCount()) {
                     FragmentManager manager = ((Fragment) object).getFragmentManager();
+                    assert manager != null;
                     FragmentTransaction transanction = manager.beginTransaction();
                     transanction.remove((Fragment) object);
                     System.gc();

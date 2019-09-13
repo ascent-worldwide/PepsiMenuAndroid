@@ -5,6 +5,7 @@
     tools:context=".LoginActivity">
 
     <ImageView
+        android:contentDescription="@string/content_description"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
@@ -37,7 +38,8 @@
                 android:padding="@dimen/ten_dp"
                 android:text="@string/welcome"
                 android:textColor="@color/white"
-                android:textSize="@dimen/fifty_sp" />
+                android:textSize="@dimen/fifty_sp"
+                android:layout_marginStart="@dimen/ten_dp" />
 
             <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
                 android:layout_width="match_parent"
@@ -46,7 +48,8 @@
                 android:layout_marginLeft="@dimen/twenty_dp"
                 android:text="@string/enter"
                 android:textColor="@color/white"
-                android:textSize="@dimen/twenty_four_sp" />
+                android:textSize="@dimen/twenty_four_sp"
+                android:layout_marginStart="@dimen/twenty_dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -70,7 +73,8 @@
                     android:singleLine="true"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
-                    android:textSize="@dimen/twenty_four_dp" />
+                    android:textSize="@dimen/twenty_four_dp"
+                    android:drawableStart="@drawable/user_icon" />
 
                 <com.clairvoyant.naijamenu.fonts.RobotoLightEditText
                     android:id="@+id/et_password"
@@ -85,7 +89,8 @@
                     android:padding="@dimen/twelve_dp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
-                    android:textSize="@dimen/twenty_four_sp" />
+                    android:textSize="@dimen/twenty_four_sp"
+                    android:drawableStart="@drawable/password_icon" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"

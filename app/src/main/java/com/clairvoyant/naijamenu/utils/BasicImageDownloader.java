@@ -1,5 +1,6 @@
 package com.clairvoyant.naijamenu.utils;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -174,6 +175,7 @@ public class BasicImageDownloader {
      * @param displayProgress if <b>true</b>, the {@link OnImageLoaderListener#onProgressChange(int)}
      *                        callback will be triggered to notify the caller of the download progress
      */
+    @SuppressLint("StaticFieldLeak")
     public void download(@NonNull final String imageUrl, final boolean displayProgress) {
         if (mUrlsInProgress.contains(imageUrl)) {
             Log.w(TAG, "a download for this url is already running, " +

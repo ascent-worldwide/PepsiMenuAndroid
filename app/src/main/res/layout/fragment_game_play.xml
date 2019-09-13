@@ -10,6 +10,7 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:contentDescription="@string/content_description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
@@ -17,13 +18,15 @@
             android:src="@drawable/home_screen_bg" />
 
         <ImageView
+            android:contentDescription="@string/content_description"
             android:id="@+id/pepsi_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:src="@drawable/pepsi_icon"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_alignParentStart="true" />
 
         <android.support.v7.widget.CardView
             android:layout_width="700dp"
@@ -42,7 +45,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/ten_dp">
+                    android:layout_marginLeft="@dimen/ten_dp"
+                    android:layout_marginStart="@dimen/ten_dp">
 
                     <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
                         android:id="@+id/score_icon"
@@ -54,7 +58,8 @@
                         android:padding="@dimen/ten_dp"
                         android:text="@string/score"
                         android:textColor="@color/dark_gray"
-                        android:textSize="@dimen/twenty_sp" />
+                        android:textSize="@dimen/twenty_sp"
+                        android:layout_alignParentStart="true" />
 
                     <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
                         android:id="@+id/score"
@@ -68,9 +73,10 @@
                         android:paddingTop="@dimen/twelve_dp"
                         android:paddingRight="@dimen/twenty_dp"
                         android:paddingBottom="@dimen/twelve_dp"
-                        android:text="0"
+                        android:text="@string/_0"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/twenty_sp" />
+                        android:textSize="@dimen/twenty_sp"
+                        android:layout_toEndOf="@+id/score_icon" />
 
                     <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
                         android:id="@+id/time_icon"
@@ -82,7 +88,8 @@
                         android:padding="@dimen/ten_dp"
                         android:text="@string/time"
                         android:textColor="@color/dark_gray"
-                        android:textSize="@dimen/twenty_sp" />
+                        android:textSize="@dimen/twenty_sp"
+                        android:layout_toEndOf="@+id/score" />
 
                     <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
                         android:id="@+id/time"
@@ -96,9 +103,10 @@
                         android:paddingTop="@dimen/twelve_dp"
                         android:paddingRight="@dimen/twenty_dp"
                         android:paddingBottom="@dimen/twelve_dp"
-                        android:text="00:35"
+                        android:text="@string/_00_35"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/twenty_sp" />
+                        android:textSize="@dimen/twenty_sp"
+                        android:layout_toEndOf="@+id/time_icon" />
 
                     <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
                         android:id="@+id/level_numbner"
@@ -110,7 +118,8 @@
                         android:gravity="center_horizontal"
                         android:padding="@dimen/ten_dp"
                         android:textColor="@color/dark_gray"
-                        android:textSize="@dimen/twenty_sp" />
+                        android:textSize="@dimen/twenty_sp"
+                        android:layout_toEndOf="@+id/time" />
 
                     <LinearLayout
                         android:id="@+id/scorebox"
@@ -122,9 +131,12 @@
                         android:layout_toRightOf="@+id/level_numbner"
                         android:background="@drawable/blue_background_rounded"
                         android:orientation="horizontal"
-                        android:padding="@dimen/twelve_dp"></LinearLayout>
+                        android:padding="@dimen/twelve_dp"
+                        android:layout_toStartOf="@+id/logout"
+                        android:layout_toEndOf="@+id/level_numbner" />
 
                     <ImageView
+                        android:contentDescription="@string/content_description"
                         android:id="@+id/logout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -132,19 +144,22 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/ten_dp"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/logout_icon" />
+                        android:src="@drawable/logout_icon"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/ten_dp" />
                 </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/one_dp"
-                    android:background="#263646"></LinearLayout>
+                    android:background="#263646" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <ImageView
+                        android:contentDescription="@string/content_description"
                         android:id="@+id/pepsilarge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -156,7 +171,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/pepsilarge"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_toEndOf="@+id/pepsilarge">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -171,7 +187,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/ten_dp"
-                                android:text="Q:"
+                                android:text="@string/q"
                                 android:textColor="@color/dark_gray"
                                 android:textSize="@dimen/twenty_sp"
                                 android:textStyle="bold" />
@@ -184,14 +200,16 @@
                                 android:layout_toRightOf="@+id/q"
                                 android:padding="@dimen/ten_dp"
                                 android:textColor="@color/medium_gray"
-                                android:textSize="@dimen/twenty_sp" />
+                                android:textSize="@dimen/twenty_sp"
+                                android:layout_toEndOf="@+id/q" />
                         </RelativeLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/ten_dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:baselineAligned="false">
 
                             <RelativeLayout
                                 android:layout_width="0dp"
@@ -211,27 +229,31 @@
                                     android:maxLines="2"
                                     android:minLines="2"
                                     android:padding="@dimen/twelve_dp"
-                                    android:text="Tubby"
+                                    android:text="@string/tubby"
                                     android:textColor="@color/medium_gray"
                                     android:textSize="@dimen/twenty_sp" />
 
                                 <ImageView
+                                    android:contentDescription="@string/content_description"
                                     android:id="@+id/correct_answer_one"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentLeft="true"
                                     android:layout_alignParentTop="true"
                                     android:src="@drawable/correct_answer_icon"
-                                    android:visibility="gone" />
+                                    android:visibility="gone"
+                                    android:layout_alignParentStart="true" />
 
                                 <ImageView
+                                    android:contentDescription="@string/content_description"
                                     android:id="@+id/incorrect_answer_one"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentLeft="true"
                                     android:layout_alignParentTop="true"
                                     android:src="@drawable/incorrect_answer_icon"
-                                    android:visibility="gone" />
+                                    android:visibility="gone"
+                                    android:layout_alignParentStart="true" />
                             </RelativeLayout>
 
                             <RelativeLayout
@@ -252,27 +274,31 @@
                                     android:maxLines="2"
                                     android:minLines="2"
                                     android:padding="@dimen/twelve_dp"
-                                    android:text="Stodge"
+                                    android:text="@string/stodge"
                                     android:textColor="@color/medium_gray"
                                     android:textSize="@dimen/twenty_sp" />
 
                                 <ImageView
+                                    android:contentDescription="@string/content_description"
                                     android:id="@+id/correct_answer_two"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentLeft="true"
                                     android:layout_alignParentTop="true"
                                     android:src="@drawable/correct_answer_icon"
-                                    android:visibility="gone" />
+                                    android:visibility="gone"
+                                    android:layout_alignParentStart="true" />
 
                                 <ImageView
+                                    android:contentDescription="@string/content_description"
                                     android:id="@+id/incorrect_answer_two"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentLeft="true"
                                     android:layout_alignParentTop="true"
                                     android:src="@drawable/incorrect_answer_icon"
-                                    android:visibility="gone" />
+                                    android:visibility="gone"
+                                    android:layout_alignParentStart="true" />
                             </RelativeLayout>
                         </LinearLayout>
 
@@ -280,7 +306,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/ten_dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:baselineAligned="false">
 
                             <RelativeLayout
                                 android:layout_width="0dp"
@@ -300,27 +327,31 @@
                                     android:maxLines="2"
                                     android:minLines="2"
                                     android:padding="@dimen/twelve_dp"
-                                    android:text="Helium Bat"
+                                    android:text="@string/helium_bat"
                                     android:textColor="@color/medium_gray"
                                     android:textSize="@dimen/twenty_sp" />
 
                                 <ImageView
+                                    android:contentDescription="@string/content_description"
                                     android:id="@+id/correct_answer_three"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentLeft="true"
                                     android:layout_alignParentTop="true"
                                     android:src="@drawable/correct_answer_icon"
-                                    android:visibility="gone" />
+                                    android:visibility="gone"
+                                    android:layout_alignParentStart="true" />
 
                                 <ImageView
+                                    android:contentDescription="@string/content_description"
                                     android:id="@+id/incorrect_answer_three"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentLeft="true"
                                     android:layout_alignParentTop="true"
                                     android:src="@drawable/incorrect_answer_icon"
-                                    android:visibility="gone" />
+                                    android:visibility="gone"
+                                    android:layout_alignParentStart="true" />
                             </RelativeLayout>
 
                             <RelativeLayout
@@ -341,27 +372,31 @@
                                     android:maxLines="2"
                                     android:minLines="2"
                                     android:padding="@dimen/twelve_dp"
-                                    android:text="Stumpy"
+                                    android:text="@string/stumpy"
                                     android:textColor="@color/medium_gray"
                                     android:textSize="@dimen/twenty_sp" />
 
                                 <ImageView
+                                    android:contentDescription="@string/content_description"
                                     android:id="@+id/correct_answer_four"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentLeft="true"
                                     android:layout_alignParentTop="true"
                                     android:src="@drawable/correct_answer_icon"
-                                    android:visibility="gone" />
+                                    android:visibility="gone"
+                                    android:layout_alignParentStart="true" />
 
                                 <ImageView
+                                    android:contentDescription="@string/content_description"
                                     android:id="@+id/incorrect_answer_four"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentLeft="true"
                                     android:layout_alignParentTop="true"
                                     android:src="@drawable/incorrect_answer_icon"
-                                    android:visibility="gone" />
+                                    android:visibility="gone"
+                                    android:layout_alignParentStart="true" />
                             </RelativeLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -378,6 +413,7 @@
     </RelativeLayout>
 
     <ImageView
+        android:contentDescription="@string/content_description"
         android:id="@+id/ivOops"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

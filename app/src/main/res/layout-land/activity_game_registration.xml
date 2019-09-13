@@ -7,9 +7,10 @@
 
     <RelativeLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
+            android:contentDescription="@string/content_description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
@@ -18,12 +19,14 @@
             android:visibility="gone" />
 
         <ImageView
+            android:contentDescription="@string/content_description"
             android:id="@+id/pepsi_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/pepsi_icon" />
+            android:src="@drawable/pepsi_icon"
+            android:layout_alignParentStart="true" />
 
         <android.support.v7.widget.CardView
             android:layout_width="500dp"
@@ -65,7 +68,8 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/light_gray"
                     android:textSize="@dimen/twenty_four_sp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    android:drawableStart="@drawable/gr_name" />
 
                 <com.clairvoyant.naijamenu.fonts.RobotoRegularEditText
                     android:id="@+id/et_email"
@@ -81,7 +85,8 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/light_gray"
                     android:textSize="@dimen/twenty_four_sp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    android:drawableStart="@drawable/gr_email" />
 
                 <com.clairvoyant.naijamenu.fonts.RobotoRegularEditText
                     android:id="@+id/et_phone_number"
@@ -98,7 +103,8 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/light_gray"
                     android:textSize="@dimen/twenty_four_sp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    android:drawableStart="@drawable/gr_phone" />
 
                 <com.clairvoyant.naijamenu.fonts.RobotoRegularButton
                     android:id="@+id/btn_submit"

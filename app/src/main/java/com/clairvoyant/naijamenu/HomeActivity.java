@@ -41,6 +41,7 @@ import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity implements OnClickListener {
 
@@ -76,7 +77,7 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
 
         if (Utils.isOnline(mContext)) {
             progressView = findViewById(R.id.progress_view_promotion);
-            getPromotionalBanners(Constants.PROMOTIONAL_BANNER_API);
+            getPromotionalBanners();
         }
         checkForStoragePermission();
     }
@@ -85,16 +86,13 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 Log.v(TAG,"Permission is granted");
-                return;
             } else {
                 Log.v(TAG,"Permission is revoked");
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
-                return;
             }
         }
         else { //permission is automatically granted on sdk<23 upon installation
             Log.v(TAG,"Permission is granted");
-            return;
         }
     }
 
@@ -106,7 +104,6 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
             //resume tasks needing this permission
         } else {
             Toast.makeText(mContext, R.string.write_external_storage_permission, Toast.LENGTH_LONG).show();
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
             finish();
         }
     }
@@ -181,10 +178,10 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
 
     @Override
     public void onBackPressed() {
-        showConfirmationDialog(R.string.are_you_sure_you_want_to_exit);
+        showConfirmationDialog();
     }
 
-    private void getPromotionalBanners(String api) {
+    private void getPromotionalBanners() {
 
         CommonRequestBean requestBean = new CommonRequestBean();
         requestBean.setApp_version(Utils.getAppVersion(mContext));
@@ -193,7 +190,7 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
 
         final String param = new Gson().toJson(requestBean, CommonRequestBean.class);
 
-        StringRequest request = new StringRequest(Method.POST, api, promotionSuccess(), promotionError()) {
+        StringRequest request = new StringRequest(Method.POST, Constants.PROMOTIONAL_BANNER_API, promotionSuccess(), promotionError()) {
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -333,30 +330,20 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
         };
     }
 
-    private void showConfirmationDialog(int resource) {
+    private void showConfirmationDialog() {
         final Dialog dialog = new Dialog(mContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.app_exit_dialog_view);
         RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
-        messageView.setText(resource);
+        messageView.setText(R.string.are_you_sure_you_want_to_exit);
         RobotoRegularTextView cancel = dialog.findViewById(R.id.cancel);
         RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
-        cancel.setOnClickListener(new OnClickListener() {
+        cancel.setOnClickListener(v -> dialog.dismiss());
 
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        ok.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                finish();
-            }
+        ok.setOnClickListener(v -> {
+            dialog.dismiss();
+            finish();
         });
         dialog.show();
     }
@@ -367,30 +354,22 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
     private void showUpdateAppDialog() {
         final Dialog dialog = new Dialog(mContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.app_exit_dialog_view);
         RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(R.string.updateAppPopupTxt);
         RobotoRegularTextView cancel = dialog.findViewById(R.id.cancel);
         RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
         ok.setText(getString(R.string.update));
-        cancel.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        cancel.setOnClickListener(v -> dialog.dismiss());
 
-        ok.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                String appPackageName = mContext.getPackageName(); // getPackageName() from Context or Activity object
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                } catch (android.content.ActivityNotFoundException anfe) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                }
+        ok.setOnClickListener(v -> {
+            dialog.dismiss();
+            String appPackageName = mContext.getPackageName(); // getPackageName() from Context or Activity object
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+            } catch (android.content.ActivityNotFoundException anfe) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
             }
         });
         dialog.show();

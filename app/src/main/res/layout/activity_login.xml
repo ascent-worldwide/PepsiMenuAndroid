@@ -5,6 +5,7 @@
     tools:context=".LoginActivity">
 
     <ImageView
+        android:contentDescription="@string/content_description"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
@@ -65,7 +66,8 @@
                     android:singleLine="true"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
-                    android:textSize="@dimen/twenty_four_sp" />
+                    android:textSize="@dimen/twenty_four_sp"
+                    android:drawableStart="@drawable/user_icon" />
 
                 <com.clairvoyant.naijamenu.fonts.RobotoLightEditText
                     android:id="@+id/et_password"
@@ -80,7 +82,8 @@
                     android:padding="@dimen/twelve_dp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
-                    android:textSize="@dimen/twenty_four_sp" />
+                    android:textSize="@dimen/twenty_four_sp"
+                    android:drawableStart="@drawable/password_icon" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"

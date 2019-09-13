@@ -78,15 +78,8 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
         mContext = getActivity();
         if (!Utils.isOnline(mContext)) {
             gameView = inflater.inflate(R.layout.no_network_activity, container, false);
-            RobotoRegularButton tryAgain = (RobotoRegularButton) gameView.findViewById(R.id.try_again);
-            tryAgain.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View arg0) {
-                    reload();
-                }
-            });
-
+            RobotoRegularButton tryAgain = gameView.findViewById(R.id.try_again);
+            tryAgain.setOnClickListener(arg0 -> reload());
         } else {
             gameView = inflater.inflate(R.layout.fragment_game_play, container, false);
             initializeViews(gameView);
@@ -98,11 +91,7 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
             }
 
             ImageView logo = gameView.findViewById(R.id.pepsi_logo);
-            logo.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                }
+            logo.setOnClickListener(v -> {
             });
         }
         return gameView;
@@ -495,13 +484,9 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
 
     private void pauseAndRefresh() {
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                refreshNextQuestion();
-                showNextQuestion();
-            }
+        handler.postDelayed(() -> {
+            refreshNextQuestion();
+            showNextQuestion();
         }, 700);
     }
 
@@ -513,13 +498,9 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
         RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(message);
         RobotoRegularTextView continueGame = dialog.findViewById(R.id.continue_game);
-        continueGame.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                resetViews();
-                dialog.dismiss();
-            }
+        continueGame.setOnClickListener(v -> {
+            resetViews();
+            dialog.dismiss();
         });
 
         dialog.show();
@@ -556,14 +537,7 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
         RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(message);
         RobotoRegularTextView continueGame = dialog.findViewById(R.id.continue_game);
-        continueGame.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
+        continueGame.setOnClickListener(v -> dialog.dismiss());
         dialog.show();
     }
 
@@ -575,17 +549,13 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
         RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText("You Have Won " + message);
         RobotoRegularTextView clickNow = dialog.findViewById(R.id.click_now);
-        clickNow.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, GamePlayRegistration.class);
-                intent.putExtra("PRIZE_ID", prizeId);
-                intent.putExtra("CONTEST_ID", contestId);
-                startActivity(intent);
-                dialog.dismiss();
-                ((Activity) mContext).finish();
-            }
+        clickNow.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, GamePlayRegistration.class);
+            intent.putExtra("PRIZE_ID", prizeId);
+            intent.putExtra("CONTEST_ID", contestId);
+            startActivity(intent);
+            dialog.dismiss();
+            mContext.finish();
         });
 
         dialog.show();
@@ -600,21 +570,9 @@ public class GamePlayFragment extends Fragment implements OnClickListener {
         messageView.setText(resource);
         RobotoRegularTextView cancel = dialog.findViewById(R.id.cancel);
         RobotoRegularTextView ok = dialog.findViewById(R.id.ok);
-        cancel.setOnClickListener(new OnClickListener() {
+        cancel.setOnClickListener(v -> dialog.dismiss());
 
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        ok.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                mContext.finish();
-            }
-        });
+        ok.setOnClickListener(v -> mContext.finish());
         dialog.show();
     }
 

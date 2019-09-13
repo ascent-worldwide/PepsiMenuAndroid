@@ -7,7 +7,7 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,7 +22,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -41,7 +41,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/five_dp"
-                            android:text="Ques1:"
+                            android:text="@string/ques1"
                             android:textColor="@color/dark_gray"
                             android:textSize="@dimen/twenty_sp" />
 
@@ -49,7 +49,7 @@
                             android:id="@+id/question_one"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Your thought on restaurant ambience"
+                            android:text="@string/your_thought_on_restaurant_ambience"
                             android:textColor="@color/medium_gray"
                             android:textSize="@dimen/sixteen_sp" />
 
@@ -109,7 +109,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/five_dp"
-                            android:text="Ques2:"
+                            android:text="@string/ques2"
                             android:textColor="@color/dark_gray"
                             android:textSize="@dimen/twenty_sp" />
 
@@ -117,7 +117,7 @@
                             android:id="@+id/question_two"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Your thought about food"
+                            android:text="@string/your_thought_about_food"
                             android:textColor="@color/medium_gray"
                             android:textSize="@dimen/sixteen_sp" />
 
@@ -177,7 +177,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/five_dp"
-                            android:text="Ques3:"
+                            android:text="@string/ques3"
                             android:textColor="@color/dark_gray"
                             android:textSize="@dimen/twenty_sp" />
 
@@ -185,7 +185,7 @@
                             android:id="@+id/question_three"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="How did you find our service"
+                            android:text="@string/how_did_you_find_our_service"
                             android:textColor="@color/medium_gray"
                             android:textSize="@dimen/sixteen_sp" />
 
@@ -245,7 +245,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/five_dp"
-                            android:text="Ques4:"
+                            android:text="@string/ques4"
                             android:textColor="@color/dark_gray"
                             android:textSize="@dimen/twenty_sp" />
 
@@ -253,7 +253,7 @@
                             android:id="@+id/question_four"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Value for money"
+                            android:text="@string/value_for_money"
                             android:textColor="@color/medium_gray"
                             android:textSize="@dimen/sixteen_sp" />
 
@@ -307,7 +307,7 @@
                 <LinearLayout
                     android:layout_width="@dimen/one_px"
                     android:layout_height="match_parent"
-                    android:background="@color/dark_gray"></LinearLayout>
+                    android:background="@color/dark_gray" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -332,7 +332,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="@dimen/ten_dp"
-                        android:text="OR"
+                        android:text="@string/or"
                         android:textColor="@color/medium_gray" />
 
                     <com.clairvoyant.naijamenu.fonts.RobotoRegularEditText
@@ -361,14 +361,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:baselineAligned="false">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/five_dp"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:layout_marginEnd="@dimen/five_dp">
 
                             <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
                                 android:layout_width="wrap_content"
@@ -385,10 +387,12 @@
                                 android:background="@drawable/border_all_gray_rounded"
                                 android:drawableRight="@drawable/calendar_icon"
                                 android:gravity="center_vertical"
-                                android:hint="Select Birthday"
+                                android:hint="@string/select_birthday"
                                 android:paddingLeft="@dimen/ten_dp"
                                 android:textColor="@color/medium_gray"
-                                android:textSize="@dimen/twenty_sp" />
+                                android:textSize="@dimen/twenty_sp"
+                                android:drawableEnd="@drawable/calendar_icon"
+                                android:paddingStart="@dimen/ten_dp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -396,7 +400,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/five_dp"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:layout_marginStart="@dimen/five_dp">
 
                             <com.clairvoyant.naijamenu.fonts.RobotoRegularTextView
                                 android:layout_width="wrap_content"
@@ -413,10 +418,12 @@
                                 android:background="@drawable/border_all_gray_rounded"
                                 android:drawableRight="@drawable/calendar_icon"
                                 android:gravity="center_vertical"
-                                android:hint="Select Anniversary"
+                                android:hint="@string/select_anniversary"
                                 android:paddingLeft="@dimen/ten_dp"
                                 android:textColor="@color/medium_gray"
-                                android:textSize="@dimen/twenty_sp" />
+                                android:textSize="@dimen/twenty_sp"
+                                android:drawableEnd="@drawable/calendar_icon"
+                                android:paddingStart="@dimen/ten_dp" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -425,7 +432,6 @@
                     android:id="@+id/btn_submit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
                     android:layout_margin="@dimen/twenty_dp"
                     android:background="@drawable/green_background_rounded"
                     android:padding="@dimen/twelve_dp"

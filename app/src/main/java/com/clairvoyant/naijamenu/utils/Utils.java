@@ -154,7 +154,7 @@ public class Utils {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.no_internet_dialog);
-        RobotoRegularTextView messageView = (RobotoRegularTextView) dialog.findViewById(R.id.message);
+        RobotoRegularTextView messageView = dialog.findViewById(R.id.message);
         messageView.setText(resource);
 		/*RobotoRegularTextView tvTryAgain = (RobotoRegularTextView) dialog.findViewById(R.id.tvTryAgain);
 		RobotoRegularTextView ok = (RobotoRegularTextView) dialog.findViewById(R.id.ok);

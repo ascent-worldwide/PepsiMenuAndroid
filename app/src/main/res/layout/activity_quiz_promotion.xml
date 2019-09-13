@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:contentDescription="@string/content_description"
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,6 +24,7 @@
         android:paddingRight="@dimen/twenty_four_dp"
         android:paddingBottom="@dimen/twelve_dp"
         android:text="@string/start_quiz"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

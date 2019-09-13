@@ -114,4 +114,25 @@
     <string name="please_wait_while">Please wait while downloading video</string>
     <string name="update">Update</string>
     <string name="write_external_storage_permission">Write External Storage permission allows us to do store images. Please allow this permission in App Settings.</string>
+    <string name="you_have_won_a_voucher_worth_nn500_to_claim_your_voucher">You have won a voucher worth N500. To claim your voucher</string>
+    <string name="you_have_successfully_completed_level_1_nto_play_level2_press">You have successfully completed level 1. To play Level2 press</string>
+    <string name="ooops_you_didn_t_clear_the_nlevel2">Ooops....!! You didn’t clear the Level2</string>
+    <string name="content_description">Content Description</string>
+    <string name="la_veranda">LA VERANDA</string>
+    <string name="_0">0</string>
+    <string name="_00_35">00:35</string>
+    <string name="q">Q:</string>
+    <string name="tubby">Tubby</string>
+    <string name="stodge">Stodge</string>
+    <string name="helium_bat">Helium Bat</string>
+    <string name="stumpy">Stumpy</string>
+    <string name="or">OR</string>
+    <string name="ques1">Ques1:</string>
+    <string name="your_thought_on_restaurant_ambience">Your thought on restaurant ambience</string>
+    <string name="ques2">Ques2:</string>
+    <string name="your_thought_about_food">Your thought about food</string>
+    <string name="ques3">Ques3:</string>
+    <string name="how_did_you_find_our_service">How did you find our service</string>
+    <string name="ques4">Ques4:</string>
+    <string name="value_for_money">Value for money</string>
 </resources>
