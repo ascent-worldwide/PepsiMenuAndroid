@@ -113,4 +113,5 @@
     <string name="title_activity_brand_promotion">BrandPromotionActivity</string>
     <string name="please_wait_while">Please wait while downloading video</string>
     <string name="update">Update</string>
+    <string name="write_external_storage_permission">Write External Storage permission allows us to do store images. Please allow this permission in App Settings.</string>
 </resources>

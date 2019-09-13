@@ -206,11 +206,11 @@ public class Utils {
     }
 
     public static void setOrientation(Context mContext) {
-        int orientation = PreferencesUtils.getInt(mContext, Constants.ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-        if (orientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE)
-            ((Activity) mContext).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-        else
-            ((Activity) mContext).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+//        int orientation = PreferencesUtils.getInt(mContext, Constants.ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+//        if (orientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE)
+//            ((Activity) mContext).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+//        else
+//            ((Activity) mContext).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
     }
 
     public static String getYouTubeId(String youTubeUrl) {

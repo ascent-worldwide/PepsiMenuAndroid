@@ -1,11 +1,16 @@
 package com.clairvoyant.naijamenu;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -39,6 +44,8 @@ import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity implements OnClickListener {
 
+    private static String TAG = HomeActivity.class.getSimpleName();
+    private static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 1000;
     private Context mContext;
     private RelativeLayout progressView;
     private boolean isPromoBannerAvailable = true;
@@ -70,6 +77,37 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
         if (Utils.isOnline(mContext)) {
             progressView = findViewById(R.id.progress_view_promotion);
             getPromotionalBanners(Constants.PROMOTIONAL_BANNER_API);
+        }
+        checkForStoragePermission();
+    }
+
+    public  void checkForStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted");
+                return;
+            } else {
+                Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
+                return;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted");
+            return;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Log.v(TAG, "Permission: " + permissions[0] + "was " + grantResults[0]);
+            //resume tasks needing this permission
+        } else {
+            Toast.makeText(mContext, R.string.write_external_storage_permission, Toast.LENGTH_LONG).show();
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
+            finish();
         }
     }
 

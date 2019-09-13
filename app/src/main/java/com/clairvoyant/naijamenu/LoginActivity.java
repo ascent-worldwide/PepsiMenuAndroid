@@ -1,8 +1,13 @@
 package com.clairvoyant.naijamenu;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -39,8 +44,8 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
 
     private static String TAG = LoginActivity.class.getSimpleName();
+    private static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 2000;
 
-    //	private static final String TAG = LoginActivity.class.getSimpleName();
     private RobotoLightEditText etUsername, etPassword;
     private RobotoRegularButton btnSignIn;
     private Context mContext;
@@ -76,24 +81,20 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         wakeupViews();
-
+        checkForStoragePermission();
     }
 
     private void wakeupViews() {
 
-        etUsername = (RobotoLightEditText) findViewById(R.id.et_username);
-        etPassword = (RobotoLightEditText) findViewById(R.id.et_password);
-        btnSignIn = (RobotoRegularButton) findViewById(R.id.btn_sign_in);
-        progressView = (RelativeLayout) findViewById(R.id.progress_view_login);
-        btnSignIn.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (Utils.isOnline(mContext)) {
-                    initializeLogin();
-                } else {
-                    Toast.makeText(mContext, R.string.network_failure, Toast.LENGTH_SHORT).show();
-                }
+        etUsername = findViewById(R.id.et_username);
+        etPassword = findViewById(R.id.et_password);
+        btnSignIn = findViewById(R.id.btn_sign_in);
+        progressView = findViewById(R.id.progress_view_login);
+        btnSignIn.setOnClickListener(v -> {
+            if (Utils.isOnline(mContext)) {
+                initializeLogin();
+            } else {
+                Toast.makeText(mContext, R.string.network_failure, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -189,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
                             else
                                 PreferencesUtils.putString(mContext, Constants.RESTAURANT_THEME, "#f25a43");
 
-                            PreferencesUtils.putInt(mContext, Constants.ORIENTATION, loginResponse.getOrientation());
+//                            PreferencesUtils.putInt(mContext, Constants.ORIENTATION, loginResponse.getOrientation());
                             PreferencesUtils.putString(mContext, Constants.RESTAURANT_HOMESCREEN_IMG, loginResponse.getRestaurant_home_screen_img());
                             PreferencesUtils.putString(mContext, Constants.RESTAURANT_BACKGROUND_IMG_LANDSCAPE, loginResponse.getRestaurant_menu_landscape_img());
                             PreferencesUtils.putString(mContext, Constants.RESTAURANT_BACKGROUND_IMG_PORTRAIT, loginResponse.getRestaurant_menu_portrait_img());
@@ -253,5 +254,33 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    public  void checkForStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted");
+                return;
+            } else {
+                Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
+                return;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted");
+            return;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Log.v(TAG, "Permission: " + permissions[0] + "was " + grantResults[0]);
+        } else {
+            Toast.makeText(mContext, R.string.write_external_storage_permission, Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 }
