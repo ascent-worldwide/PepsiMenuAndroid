@@ -37,6 +37,7 @@ import com.clairvoyant.naijamenu.utils.AppController;
 import com.clairvoyant.naijamenu.utils.Constants;
 import com.clairvoyant.naijamenu.utils.PreferencesUtils;
 import com.clairvoyant.naijamenu.utils.Utils;
+import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 
 import java.util.HashMap;

@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
@@ -63,7 +62,7 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
         MenuViewHolder.productName.setText(mMenuBean.getProductName());
         Utils.renderImage(mContext, mMenuBean.getProductUrl(), MenuViewHolder.productImage);
         MenuViewHolder.productDesc.setText(mMenuBean.getProductDesc());
-
+        Log.d(TAG, mMenuBean.getProductUrl());
         DecimalFormat formatter = new DecimalFormat("#,###,###");
 
         MenuViewHolder.price.setText("" + formatter.format(mMenuBean.getPrice()));
@@ -466,7 +465,7 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
             View itemView = mLayoutInflater.inflate(R.layout.pager_item, container, false);
             ImageView imageView = itemView.findViewById(R.id.imageView);
             String imageUrl = mResources[position];
-            Log.d(TAG, "image url=" + imageUrl);
+            Log.d(TAG, imageUrl);
 
             Utils.renderImage(mContext, imageUrl, imageView);
 //	        if(!TextUtils.isEmpty(imageUrl))

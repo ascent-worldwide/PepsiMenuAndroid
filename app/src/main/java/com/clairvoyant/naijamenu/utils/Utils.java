@@ -322,6 +322,9 @@ public class Utils {
                             if (bitmap != null) {
                                 int ivWidth = pImageView.getWidth();
                                 int ivHeight = pImageView.getHeight();
+                                if (ivWidth == 0 || ivHeight == 0) {
+                                    return;
+                                }
                                 Bitmap newbitMap = Bitmap.createScaledBitmap(bitmap, ivWidth, ivHeight, true);
                                 pImageView.setImageBitmap(newbitMap);
                                 Log.i("success", "BasicImageDownloader image read successfully");

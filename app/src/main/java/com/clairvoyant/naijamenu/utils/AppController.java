@@ -25,8 +25,8 @@ public class AppController extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        mInstance = this;
         Fabric.with(this, new Crashlytics());
+        mInstance = this;
     }
 
     public RequestQueue getRequestQueue() {
