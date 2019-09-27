@@ -22,8 +22,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.clairvoyant.naijamenu.R;
 import com.clairvoyant.naijamenu.bean.ProductBean;
+import com.clairvoyant.naijamenu.utils.AppController;
 import com.clairvoyant.naijamenu.utils.Constants;
 import com.clairvoyant.naijamenu.utils.DynamicHeightViewPager;
 import com.clairvoyant.naijamenu.utils.Utils;
@@ -61,6 +63,8 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
         final ProductBean mMenuBean = menuItemList.get(position);
         MenuViewHolder.productName.setText(mMenuBean.getProductName());
         Utils.renderImage(mContext, mMenuBean.getProductUrl(), MenuViewHolder.productImage);
+//        Glide.with(mContext).load(mMenuBean.getProductUrl()).placeholder(R.drawable.product_placeholder).into(MenuViewHolder.productImage);
+
         MenuViewHolder.productDesc.setText(mMenuBean.getProductDesc());
         Log.d(TAG, mMenuBean.getProductUrl());
         DecimalFormat formatter = new DecimalFormat("#,###,###");
@@ -403,7 +407,14 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
     @NonNull
     @Override
     public MenuViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
-        View categoryView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.menu_row_item, viewGroup, false);
+
+        View categoryView =  null;
+        if(AppController.getInstance().getSelectedParentMenuId() == 3) {
+            categoryView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.menu_item_layout_drinks, viewGroup, false);
+        } else {
+            categoryView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.menu_row_item, viewGroup, false);
+        }
+
         return new MenuViewHolder(categoryView);
     }
 

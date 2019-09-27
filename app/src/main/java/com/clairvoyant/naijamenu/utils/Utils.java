@@ -17,6 +17,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -327,6 +328,7 @@ public class Utils {
                                 }
                                 Bitmap newbitMap = Bitmap.createScaledBitmap(bitmap, ivWidth, ivHeight, true);
                                 pImageView.setImageBitmap(newbitMap);
+                                pImageView.setAdjustViewBounds(true);
                                 Log.i("success", "BasicImageDownloader image read successfully");
                             }
                         }
@@ -349,17 +351,6 @@ public class Utils {
      * @param pImageView
      */
     private static void renderImageUsingGlide(Context pContext, String pImgUrl, final ImageView pImageView) {
-       /* Picasso.with(pContext).load(pImgUrl).error(R.drawable.product_placeholder).resize(200, 200).placeholder(R.drawable.product_placeholder).into(pImageView, new Callback() {
-            @Override
-            public void onSuccess() {
-                Log.d("image load", "success");
-            }
-
-            @Override
-            public void onError() {
-                Log.d("image load", "fail");
-            }
-        });*/
-        Glide.with(pContext).load(pImgUrl).fitCenter().placeholder(R.drawable.product_placeholder).fitCenter().into(pImageView);
+        Glide.with(pContext).load(pImgUrl).placeholder(R.drawable.product_placeholder).into(pImageView);
     }
 }

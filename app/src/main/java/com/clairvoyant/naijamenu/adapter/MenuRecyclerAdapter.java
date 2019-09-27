@@ -16,6 +16,7 @@ import com.clairvoyant.naijamenu.MenuFragmentActivity;
 import com.clairvoyant.naijamenu.R;
 import com.clairvoyant.naijamenu.bean.MenuCategoryBean;
 import com.clairvoyant.naijamenu.fonts.RobotoLightTextView;
+import com.clairvoyant.naijamenu.utils.AppController;
 import com.clairvoyant.naijamenu.utils.Utils;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
             Intent intent = new Intent(mContext, MenuFragmentActivity.class);
             Bundle bundle = new Bundle();
             bundle.putInt("POSITION", position);
+            AppController.getInstance().setSelectedParentMenuId(position);
             bundle.putSerializable("PRODUCTS", menuList);
             intent.putExtra("PRODUCT_BUNDLE", bundle);
             mContext.startActivity(intent);

@@ -17,6 +17,7 @@ public class AppController extends MultiDexApplication {
     private static AppController mInstance;
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
+    private int mSelectedParentMenuId;
 
     public static synchronized AppController getInstance() {
         return mInstance;
@@ -61,5 +62,13 @@ public class AppController extends MultiDexApplication {
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);
         }
+    }
+
+    public int getSelectedParentMenuId() {
+        return mSelectedParentMenuId;
+    }
+
+    public void setSelectedParentMenuId(int mSelectedParentMenuId) {
+        this.mSelectedParentMenuId = mSelectedParentMenuId;
     }
 }

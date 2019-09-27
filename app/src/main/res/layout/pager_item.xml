@@ -9,9 +9,8 @@
     <ImageView
         android:contentDescription="@string/content_description"
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:adjustViewBounds="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/product_placeholder" />
 
 </LinearLayout>
