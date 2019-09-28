@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -62,7 +63,6 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
         final ProductBean mMenuBean = menuItemList.get(position);
         MenuViewHolder.productName.setText(mMenuBean.getProductName());
         Utils.renderImage(mContext, mMenuBean.getProductUrl(), MenuViewHolder.productImage);
-//        Glide.with(mContext).load(mMenuBean.getProductUrl()).placeholder(R.drawable.product_placeholder).into(MenuViewHolder.productImage);
 
         MenuViewHolder.productDesc.setText(mMenuBean.getProductDesc());
         Log.d(TAG, mMenuBean.getProductUrl());
@@ -146,25 +146,9 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
             final Dialog dialog = new Dialog(mContext);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.product_detail_dialog_view);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.setCancelable(false);
-
-            Display display = mContext.getWindowManager().getDefaultDisplay();
-            Point size = new Point();
-            display.getSize(size);
-            int width = size.x;
-            int height = size.y;
-
-
-            if (mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-
-                height = (width / 2 * 900) / 1200;
-                dialog.getWindow().setLayout(width - 50, height);
-//					dialog.getWindow().setLayout(2340, 954);
-            } else {
-//					dialog.getWindow().setLayout(1200, 1800);
-                height = (3 * width * 900 * 2) / (1200 * 4);
-                dialog.getWindow().setLayout((int) (.9 * width), height);
-            }
+            dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
             final DynamicHeightViewPager viewPager = dialog.findViewById(R.id.product_detail_viewpager);
             final ImageView slideLeft = dialog.findViewById(R.id.left);
@@ -476,13 +460,7 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
             ImageView imageView = itemView.findViewById(R.id.imageView);
             String imageUrl = mResources[position];
             Log.d(TAG, imageUrl);
-
             Utils.renderImage(mContext, imageUrl, imageView);
-//	        if(!TextUtils.isEmpty(imageUrl))
-//	        	Picasso.with(mContext).load(imageUrl).placeholder(R.drawable.product_placeholder).fit().into(imageView);
-//	        else
-//	        	Picasso.with(mContext).load("xyz").placeholder(R.drawable.product_placeholder).error(R.drawable.product_placeholder).into(imageView);
-
             container.addView(itemView);
             return itemView;
         }
