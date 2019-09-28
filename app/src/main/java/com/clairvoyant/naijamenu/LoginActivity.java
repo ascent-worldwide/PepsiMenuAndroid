@@ -3,6 +3,7 @@ package com.clairvoyant.naijamenu;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -61,18 +62,11 @@ public class LoginActivity extends AppCompatActivity {
 
         Utils.setOrientation(mContext);
 
-//        int orientation = PreferencesUtils.getInt(mContext, Constants.ORIENTATION);
-//        if(orientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE)
-//        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-//        else
-//        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-
-        //check if GCM token is empty
-//        if (TextUtils.isEmpty(Utils.getGCMId(mContext)))
-//        {
-        // GCM Registration
-//         startService(new Intent(this, DownloadVideoService.class));
-//        }
+        int orientation = PreferencesUtils.getInt(mContext, Constants.ORIENTATION);
+        if(orientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE)
+        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+        else
+        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 
         boolean loggineIn = PreferencesUtils.getBoolean(mContext, Constants.LOGGED);
 
@@ -191,7 +185,7 @@ public class LoginActivity extends AppCompatActivity {
                             else
                                 PreferencesUtils.putString(mContext, Constants.RESTAURANT_THEME, "#f25a43");
 
-//                            PreferencesUtils.putInt(mContext, Constants.ORIENTATION, loginResponse.getOrientation());
+                            PreferencesUtils.putInt(mContext, Constants.ORIENTATION, loginResponse.getOrientation());
                             PreferencesUtils.putString(mContext, Constants.RESTAURANT_HOMESCREEN_IMG, loginResponse.getRestaurant_home_screen_img());
                             PreferencesUtils.putString(mContext, Constants.RESTAURANT_BACKGROUND_IMG_LANDSCAPE, loginResponse.getRestaurant_menu_landscape_img());
                             PreferencesUtils.putString(mContext, Constants.RESTAURANT_BACKGROUND_IMG_PORTRAIT, loginResponse.getRestaurant_menu_portrait_img());

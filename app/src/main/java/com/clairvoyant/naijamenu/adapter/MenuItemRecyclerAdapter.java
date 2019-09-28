@@ -22,7 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.clairvoyant.naijamenu.R;
 import com.clairvoyant.naijamenu.bean.ProductBean;
 import com.clairvoyant.naijamenu.utils.AppController;
@@ -410,7 +409,7 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
 
         View categoryView =  null;
         if(AppController.getInstance().getSelectedParentMenuId() == 3) {
-            categoryView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.menu_item_layout_drinks, viewGroup, false);
+            categoryView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.menu_row_item_layout_drinks, viewGroup, false);
         } else {
             categoryView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.menu_row_item, viewGroup, false);
         }
@@ -420,7 +419,7 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
 
     class MenuViewHolder extends RecyclerView.ViewHolder {
 
-        LinearLayout rootView;
+        RelativeLayout rootView;
         ImageView productImage;
         TextView productName;
         TextView productDesc;

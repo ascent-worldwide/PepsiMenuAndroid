@@ -49,36 +49,27 @@
 
         <activity
             android:name="com.clairvoyant.naijamenu.MainActivity"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
             android:name="com.clairvoyant.naijamenu.LoginActivity"
             android:noHistory="true"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.clairvoyant.naijamenu.HomeActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:launchMode="singleTask" />
 
         <activity
-            android:name="com.clairvoyant.naijamenu.RateFragmentActivity"
-            android:screenOrientation="portrait" />
+            android:name="com.clairvoyant.naijamenu.RateFragmentActivity" />
         <activity
-            android:name="com.clairvoyant.naijamenu.PromotionActivity"
-            android:screenOrientation="portrait" />
+            android:name="com.clairvoyant.naijamenu.PromotionActivity" />
         <activity
-            android:name="com.clairvoyant.naijamenu.RestaurantPromotionActivity"
-            android:screenOrientation="portrait" />
+            android:name="com.clairvoyant.naijamenu.RestaurantPromotionActivity" />
         <activity
-            android:name="com.clairvoyant.naijamenu.MenuFragmentActivity"
-            android:screenOrientation="portrait" />
+            android:name="com.clairvoyant.naijamenu.MenuFragmentActivity" />
         <activity
-            android:name="com.clairvoyant.naijamenu.QuizPromotionActivity"
-            android:screenOrientation="portrait" />
+            android:name="com.clairvoyant.naijamenu.QuizPromotionActivity" />
         <activity
             android:name="com.clairvoyant.naijamenu.GamePlayRegistration"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
 
         <provider
@@ -94,8 +85,7 @@
 
         <activity
             android:name="com.clairvoyant.naijamenu.SplashScreen"
-            android:noHistory="true"
-            android:screenOrientation="portrait">
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

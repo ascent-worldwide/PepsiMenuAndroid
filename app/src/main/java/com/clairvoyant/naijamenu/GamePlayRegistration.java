@@ -117,7 +117,7 @@ public class GamePlayRegistration extends AppCompatActivity {
         StringRequest request = new StringRequest(Method.POST, api, winnerSuccess(), winnerError()) {
 
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> param = new HashMap<>();
                 param.put("data", params);
                 Log.i("LOGIN_PARAM", param.toString());
@@ -132,36 +132,27 @@ public class GamePlayRegistration extends AppCompatActivity {
 
     private com.android.volley.Response.Listener<String> winnerSuccess() {
 
-        return new com.android.volley.Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                try {
-                    if (response != null && response.length() > 0) {
-                        progressView.setVisibility(View.GONE);
-                        Utils.longInfo(response);
-                        QuizWinnerResponse responseBean = new Gson().fromJson(response, QuizWinnerResponse.class);
-                        if (responseBean.getStatus().equals("true")) {
-                            Toast.makeText(mContext, getString(R.string.your_detail_has_been_uploaded), Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(mContext, HomeActivity.class));
-                        }
+        return response -> {
+            try {
+                if (response != null && response.length() > 0) {
+                    progressView.setVisibility(View.GONE);
+                    Utils.longInfo(response);
+                    QuizWinnerResponse responseBean = new Gson().fromJson(response, QuizWinnerResponse.class);
+                    if (responseBean.getStatus().equals("true")) {
+                        Toast.makeText(mContext, getString(R.string.your_detail_has_been_uploaded), Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(mContext, HomeActivity.class));
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         };
     }
 
     private com.android.volley.Response.ErrorListener winnerError() {
-        return new com.android.volley.Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressView.setVisibility(View.GONE);
-                Toast.makeText(mContext, R.string.network_failure, Toast.LENGTH_SHORT).show();
-            }
-
+        return error -> {
+            progressView.setVisibility(View.GONE);
+            Toast.makeText(mContext, R.string.network_failure, Toast.LENGTH_SHORT).show();
         };
     }
 }
