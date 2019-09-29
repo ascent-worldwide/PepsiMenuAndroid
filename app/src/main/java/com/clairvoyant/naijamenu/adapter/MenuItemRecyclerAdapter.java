@@ -390,14 +390,7 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
     @NonNull
     @Override
     public MenuViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
-
-        View categoryView =  null;
-        if(AppController.getInstance().getSelectedParentMenuId() == 3) {
-            categoryView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.menu_row_item_layout_drinks, viewGroup, false);
-        } else {
-            categoryView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.menu_row_item, viewGroup, false);
-        }
-
+        View categoryView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.menu_row_item, viewGroup, false);
         return new MenuViewHolder(categoryView);
     }
 

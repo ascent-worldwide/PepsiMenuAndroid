@@ -78,6 +78,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
 
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+
     // dimensions
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
 

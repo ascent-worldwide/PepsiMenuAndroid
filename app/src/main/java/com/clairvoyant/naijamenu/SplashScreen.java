@@ -21,16 +21,14 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, " onCreate()");
+        mContext = this;
+        Utils.setOrientation(mContext);
         setContentView(R.layout.activity_splash_screen);
         initialiseViews();
     }
 
     private void initialiseViews() {
-        mContext = this;
-        Utils.setOrientation(mContext);
-
         checkBrandVideoOnServer();
-
         startThread();
     }
 

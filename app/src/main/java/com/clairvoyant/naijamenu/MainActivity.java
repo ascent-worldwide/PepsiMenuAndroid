@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         super.onCreate(savedInstanceState);
         Log.d(TAG, " onCreate()");
         mContext = this;
+        Utils.setOrientation(mContext);
+
         /*
          * if (!Utils.isOnline(mContext)){
          * setContentView(R.layout.no_network_activity); RobotoRegularButton
@@ -86,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
          * @Override public void onClick(View arg0) { reload(); } }); } else {
          */
         setContentView(R.layout.activity_main);
-        Utils.setOrientation(mContext);
         PreferencesUtils.setItemPosition(MainActivity.this, -1);
         toolbar = findViewById(R.id.main_toolbar);
 

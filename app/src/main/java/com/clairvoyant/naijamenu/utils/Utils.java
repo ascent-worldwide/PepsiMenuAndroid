@@ -10,6 +10,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -25,6 +26,8 @@ import com.clairvoyant.naijamenu.LoginActivity;
 import com.clairvoyant.naijamenu.R;
 import com.clairvoyant.naijamenu.fonts.RobotoRegularTextView;
 import com.clairvoyant.naijamenu.utils.BasicImageDownloader.OnImageReadListener;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -351,6 +354,6 @@ public class Utils {
      * @param pImageView
      */
     private static void renderImageUsingGlide(Context pContext, String pImgUrl, final ImageView pImageView) {
-        Glide.with(pContext).load(pImgUrl).placeholder(R.drawable.product_placeholder).into(pImageView);
+        Glide.with(pContext).load(pImgUrl).fitCenter().placeholder(R.drawable.product_placeholder).fitCenter().into(pImageView);
     }
 }

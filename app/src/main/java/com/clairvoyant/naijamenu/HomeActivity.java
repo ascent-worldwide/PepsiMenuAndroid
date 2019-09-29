@@ -55,12 +55,10 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
+        Utils.setOrientation(mContext);
         setContentView(R.layout.activity_home);
         Log.d(TAG, " onCreate()");
-        mContext = this;
-
-        Utils.setOrientation(mContext);
-
         LinearLayout menuBox = findViewById(R.id.menu_box);
         LinearLayout challengeBox = findViewById(R.id.challenge_box);
         RelativeLayout recipeBox = findViewById(R.id.recipe_box);
